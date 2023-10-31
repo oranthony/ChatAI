@@ -1,0 +1,29 @@
+<mat-drawer-container class="example-container" [hasBackdrop]="false" autosize>
+  <mat-drawer #drawer class="example-sidenav" mode="side" opened="true">
+    <nav>
+      <a class="side-nav-title-block">
+        <img class="side-nav-logo" [src]="ImagePath" (click)="openNav()">
+        <span class="full-width side-nav-title" *ngIf="isExpanded">LLaMA</span>
+        <a (click)="closeNav()">
+          <mat-icon class="nav-close-icon" aria-hidden="false" aria-label="Example home icon" fontIcon="close" *ngIf="isExpanded" ></mat-icon>
+        </a>
+      </a>
+
+      <a mat-button [ngClass]="isExpanded ? 'nav-link-opened' : 'nav-link-closed'">
+        <mat-icon aria-hidden="false" aria-label="home icon" fontIcon="home" class="side-nav-icon" [ngClass]="isExpanded ? 'side-nav-expdanded' : 'side-nav-closed'"></mat-icon>
+        <span class="full-width side-nav-link" *ngIf="isExpanded">Home</span>
+      </a>
+
+      <a mat-button [ngClass]="isExpanded ? 'nav-link-opened' : 'nav-link-closed'">
+        <mat-icon aria-hidden="false" aria-label="chatbot icon" fontIcon="chat_bubble" class="side-nav-icon" [ngClass]="isExpanded ? 'side-nav-expdanded' : 'side-nav-closed'"></mat-icon>
+        <span class="full-width side-nav-link" *ngIf="isExpanded">Chat</span>
+      </a>
+
+      <a mat-button  [ngClass]="isExpanded ? 'nav-link-opened' : 'nav-link-closed'">
+        <mat-icon aria-hidden="false" aria-label="image generation icon" fontIcon="image" class="side-nav-icon" [ngClass]="isExpanded ? 'side-nav-expdanded' : 'side-nav-closed'"></mat-icon>
+        <span class="full-width side-nav-link" *ngIf="isExpanded">Image Builder</span>
+      </a>
+    </nav>
+
+  </mat-drawer>
+</mat-drawer-container>

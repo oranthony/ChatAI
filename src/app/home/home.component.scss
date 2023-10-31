@@ -1,0 +1,130 @@
+a { color: inherit; } 
+
+.grid {
+  container-type: inline-size;
+  container-name: homeComponentContainer;
+  height: 100%;
+}
+
+.container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.hero-shot-container {
+  max-width: 75%;
+  text-align: center;
+  margin-bottom: 45px;
+}
+
+.hero-shot {
+  width: 100%;
+}
+
+.description {
+  font-size: 1rem;
+}
+
+.call-to-action {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  bottom: 6svh;
+}
+
+.cta-button {
+  margin-top: 25px;
+  margin-left: 35px;
+  margin-right: 35px;
+  height: 60px;
+  width: 270px;
+  background-color: rgb(241, 241, 241);
+  //color: $primary;
+  border-radius: 16px;
+  border-style: none;
+  font-family: 'Gilroy-Light', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 100;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+
+
+}
+
+.cta-button:hover {
+  cursor: pointer;
+  background-color: rgb(231, 231, 231);
+}
+
+@container homeComponentContainer (min-width: 600px) and (max-width: 959.98px) {
+  .hero-shot {
+    width: 450px;
+  }
+
+  .hero-shot-container {
+    max-width: 65%;
+    text-align: center;
+  }
+
+  .description {
+    font-size: 1.2rem;
+  }
+
+  .cta-button {
+    height: 72px;
+    width: 320px;
+  }
+
+  .call-to-action {
+    flex-direction: column;
+  }
+}
+
+@container homeComponentContainer (min-width: 960px) and (max-width: 1279.98px) {
+  .hero-shot {
+    width: 450px;
+  }
+
+  .hero-shot-container {
+    max-width: 65%;
+    text-align: center;
+  }
+
+  .description {
+    font-size: 1.2rem;
+  }
+
+  .cta-button {
+    height: 60px;
+    width: 270px;
+  }
+
+  .call-to-action { 
+    flex-direction: row;
+    position: relative;
+    bottom: 0;
+  }
+}
+
+@container homeComponentContainer (min-width: 1280px) {
+  .hero-shot {
+    width: 450px;
+  }
+
+  .description {
+    font-size: 1.2rem;
+  }
+
+  .call-to-action { 
+    flex-direction: row;
+    position: relative;
+    bottom: 0;
+  }
+
+  .cta-button {
+    height: 72px;
+    width: 290px;
+  }
+}

@@ -9,15 +9,25 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import {MatIconModule} from '@angular/material/icon';
 
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+import { ChatbotContainerComponent } from './containers/chatbot-container/chatbot-container.component';
+import { MessageListComponent } from './components/message-list/message-list.component';
+import { MessageBoxComponent } from './components/message-box/message-box.component';
+import { PictureGenContainerComponent } from './containers/picture-gen-container/picture-gen-container.component';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    SidenavComponent
+    SidenavComponent,
+    ChatbotContainerComponent,
+    MessageListComponent,
+    MessageBoxComponent,
+    PictureGenContainerComponent,
+    HomeComponent
   ],
   imports: [
-    BrowserModule,
     AppRoutingModule,
+    BrowserModule,
     BrowserAnimationsModule,
     MatSidenavModule,
     MatIconModule

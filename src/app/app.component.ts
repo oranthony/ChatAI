@@ -8,6 +8,8 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'ChatAI';
   links = [
-    { path: '/home', icon: 'home', title: 'Home'}
+    { path: '/home', icon: 'home', title: 'Home'},
+    { path: '/chatbot', icon: 'chat', title: 'Chatbot'},
+    { path: '/picture-gen', icon: 'picture', title: 'PictureGen'}
   ];
 }

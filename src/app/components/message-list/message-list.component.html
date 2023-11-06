@@ -1,1 +1,26 @@
-<p>message-list-component works!</p>
+<div id="message-list-container">
+    <div class="container" *ngFor="let message of messageList">
+      <div *ngIf="message.isAnswer else elseBlock">
+        <div class="answer-container">
+          <div class="answer">{{ message.text }}</div>
+          <div class="ai-profile-icon-container">
+            <img height="42" class="ai-profile-icon" [src]="AIProfileIcon">
+          </div>
+        </div>
+      </div>
+      <ng-template #elseBlock>
+        <span>
+          <div class="question-container">
+            <div class="question">{{ message.text }} </div>
+            <div class="user-profile-icon-container">
+              <img class="user-profile-icon" [src]="AIUserIcon">
+            </div>
+          </div>
+        </span>
+      </ng-template>
+    </div>
+</div>
+
+
+
+

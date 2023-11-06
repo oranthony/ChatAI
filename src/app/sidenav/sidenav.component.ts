@@ -1,5 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { NavigationService } from '../common/services/navigation.service';
+import { Subscription } from 'rxjs';
 
 
 @Component({
@@ -9,12 +11,15 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 })
 export class SidenavComponent {
   ImagePath: string;
-
+  openEventsubscription: Subscription;
   isExpanded = true;
 
 
-  constructor() {
+  constructor(private navigationService: NavigationService) {
     this.ImagePath = '/assets/logo-short-no-bg.png';
+    this.openEventsubscription = this.navigationService.getOpenNavDrawerEvent().subscribe(()=>{
+      this.openNav();
+      })
   }
 
   toggleNav(): void {
@@ -22,11 +27,13 @@ export class SidenavComponent {
   }
 
   openNav(): void {
-    this.isExpanded =true;
+    this.isExpanded = true;
   }
 
   closeNav(): void {
     this.isExpanded = false;
   }
+
+
 
 }

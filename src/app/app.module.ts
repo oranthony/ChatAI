@@ -7,6 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SidenavComponent } from './sidenav/sidenav.component';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import {MatIconModule} from '@angular/material/icon';
+import { HttpClientModule } from '@angular/common/http';
 
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { ChatbotContainerComponent } from './containers/chatbot-container/chatbot-container.component';
@@ -14,6 +15,13 @@ import { MessageListComponent } from './components/message-list/message-list.com
 import { MessageBoxComponent } from './components/message-box/message-box.component';
 import { PictureGenContainerComponent } from './containers/picture-gen-container/picture-gen-container.component';
 import { HomeComponent } from './home/home.component';
+import { FormsModule } from '@angular/forms';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { TextFieldModule } from '@angular/cdk/text-field';
+import { TitleTopBarComponent } from './components/title-top-bar/title-top-bar.component';
+
+
 
 @NgModule({
   declarations: [
@@ -23,14 +31,21 @@ import { HomeComponent } from './home/home.component';
     MessageListComponent,
     MessageBoxComponent,
     PictureGenContainerComponent,
-    HomeComponent
+    HomeComponent,
+    TitleTopBarComponent,
+    
   ],
   imports: [
     AppRoutingModule,
     BrowserModule,
     BrowserAnimationsModule,
+    HttpClientModule,
     MatSidenavModule,
-    MatIconModule
+    MatIconModule,
+    MatFormFieldModule,
+    MatInputModule,
+    FormsModule,
+    TextFieldModule,
   ],
   providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}],
   bootstrap: [AppComponent]

@@ -1,0 +1,60 @@
+.message-box-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 15px;
+}
+
+.message-box-form {
+  display: flex;
+  flex-grow: 1;
+}
+
+.message-box-input {
+  flex-grow: 1;
+  width: 100%;
+  border-radius: 15px;
+  //min-height: 45px;
+  //height: 45px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  padding-left: 10px;
+  padding-right: 10px;
+
+  background-color: #cfcfcf;
+  //border-color: inherit;
+  border-style: none;
+  resize: none;
+
+  border: none;
+  overflow: auto;
+  outline: none;
+
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+
+  resize: none; /*remove the resize handle on the bottom right*/
+}
+
+.message-box-input:focus {
+  background-color: #c0c0c0;
+}
+
+.button-send-container {
+  margin-left: 15px;
+}
+
+.button-send {
+  width: 45px;
+  height: 45px;
+  display: flex;
+  background-color: orange;
+  border-style: none;
+  border-radius: 12px;
+  cursor: pointer;
+}
+
+.button-send-picture {
+  margin: auto;
+}

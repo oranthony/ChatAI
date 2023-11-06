@@ -12,6 +12,7 @@
     padding-left: 25px;
     padding-right: 15px;
     background-color: #24252d;
+    cursor: pointer;
 }
 
 .nav-link-opened {
@@ -65,13 +66,14 @@
     height: 30px;
     width: 30px;
     color: #f6f6f7;
+    cursor: pointer;
 }
 
 .mat-drawer-side {
     border-right-style: none;
 }
 
-@media (max-width: 700px) {
+@media only screen and (max-width: 700px) {
     .example-container {
         width: 0;
     }

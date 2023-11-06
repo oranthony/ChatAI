@@ -63,4 +63,8 @@ export class SidenavComponent {
     this.isMobileDrawerOpen = false;
   }
 
+  closeMobileDrawer() {
+    this.isMobileDrawerOpen = false;
+  }
+
 }

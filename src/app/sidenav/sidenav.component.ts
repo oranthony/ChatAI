@@ -20,7 +20,7 @@ export class SidenavComponent {
   screenHeight: number = 0;
   screenWidth: number = 0;
   isMobileSize = false;
-  isMobileDrawerOpen = true;
+  isMobileDrawerOpen = false;
 
 
   constructor(private navigationService: NavigationService) {

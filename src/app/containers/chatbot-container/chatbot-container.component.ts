@@ -19,7 +19,7 @@ export class ChatbotContainerComponent {
 
   
   constructor(private chatbotService: ChatbotService) {
-    this.messageList = exampleTextMessage;
+    //this.messageList = exampleTextMessage;
   }
 
   sendMessage(message: string) {

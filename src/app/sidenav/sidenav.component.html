@@ -4,7 +4,7 @@
       <a class="side-nav-title-block">
         <img class="side-nav-logo" [src]="ImagePath" (click)="openNav()">
         <span class="full-width side-nav-title" *ngIf="isExpanded">LLaMA</span>
-        <a (click)="closeNav()">
+        <a class="nav-close-icon-container" (click)="closeNav()">
           <mat-icon class="nav-close-icon" aria-hidden="false" aria-label="Example home icon" fontIcon="close" *ngIf="isExpanded" ></mat-icon>
         </a>
       </a>

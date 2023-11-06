@@ -1,8 +1,11 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { NavigationService } from '../common/services/navigation.service';
 import { Subscription } from 'rxjs';
+import { HostListener } from "@angular/core";
 
+//TODO: move to env file
+const RESPONSIVE_WIDTH = 700;
 
 @Component({
   selector: 'app-sidenav',
@@ -14,12 +17,35 @@ export class SidenavComponent {
   openEventsubscription: Subscription;
   isExpanded = true;
 
+  screenHeight: number = 0;
+  screenWidth: number = 0;
+  isMobileSize = false;
+  isMobileDrawerOpen = true;
+
 
   constructor(private navigationService: NavigationService) {
+    this.getScreenSize();
     this.ImagePath = '/assets/logo-short-no-bg.png';
     this.openEventsubscription = this.navigationService.getOpenNavDrawerEvent().subscribe(()=>{
+      console.log("1");
       this.openNav();
       })
+  }
+  
+  @HostListener('window:resize', ['$event'])
+  getScreenSize() {
+        this.screenHeight = window.innerHeight;
+        this.screenWidth = window.innerWidth;
+        //console.log(this.screenHeight, this.screenWidth);
+        if (this.screenWidth >= RESPONSIVE_WIDTH && this.isMobileSize) {
+          this.isMobileSize = false;
+          console.log("isMobileSize false");
+        }
+
+        if (this.screenWidth < RESPONSIVE_WIDTH && !this.isMobileSize) {
+          this.isMobileSize = true;
+          console.log("isMobileSize true");
+        }
   }
 
   toggleNav(): void {
@@ -28,12 +54,13 @@ export class SidenavComponent {
 
   openNav(): void {
     this.isExpanded = true;
+    this.isMobileDrawerOpen = true;
+    //this.isMobileSize = false;
   }
 
   closeNav(): void {
     this.isExpanded = false;
+    this.isMobileDrawerOpen = false;
   }
-
-
 
 }

@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./picture-gen-container.component.scss']
 })
 export class PictureGenContainerComponent {
-
+  title: string = "Image Builder with AI"
 }

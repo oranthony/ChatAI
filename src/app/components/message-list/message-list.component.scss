@@ -1,16 +1,20 @@
 #message-list-container {
-  overflow-y: scroll;
   height: 100%;
   border-radius: 15px;
   padding-left: 15px;
   padding-right: 15px;
-  -ms-overflow-style: none;  /* Internet Explorer 10+ */
-  scrollbar-width: none;  /* Firefox */
+  //-ms-overflow-style: none; 
+  //scrollbar-width: none;
 }
+
+/*#message-list-container::-webkit-scrollbar { 
+  display: none;
+}*/
 
 .container {
   display: flex;
   flex-direction: column;
+  padding-top: 45px;
 }
 
 .answer-container, .question-container {
@@ -22,12 +26,7 @@
   margin-bottom: 45px;
 }
 
-#message-list-container::-webkit-scrollbar { 
-  display: none;  /* Safari and Chrome */
-}
-
 .question-container {
-  //justify-content: flex-end;
   align-items: flex-end;
 }
 

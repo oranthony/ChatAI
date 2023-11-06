@@ -50,7 +50,7 @@ export class MessageListComponent {
     // Scroll to bottom when new message has arrived
     if (this.hasNewMessageArrived) {
       this.hasNewMessageArrived = false;
-      this.scrollToBottom();
+      //this.scrollToBottom();
     }
     
   }

@@ -9,8 +9,13 @@
 }
 
 .chatbot-content {
-  display: flex;
-  flex-direction: column;
+  //display: flex;
+  //flex-direction: column;
+
+  display:grid;
+  grid-template-rows:auto 1fr auto;
+  grid-template-columns:100%;
+
   width: 100%;
   max-width: 1300px;
   background-color: white;
@@ -18,7 +23,13 @@
 }
 
 .message-list {
-  margin-bottom: auto;
-  height: 81%;
+  height: 100%;
+  //margin-bottom: auto;
+  overflow-y: auto;
+  -ms-overflow-style: none; 
+  scrollbar-width: none;
 }
 
+.message-list::-webkit-scrollbar { 
+  display: none;
+}

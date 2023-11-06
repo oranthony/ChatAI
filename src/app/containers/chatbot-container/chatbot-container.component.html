@@ -1,7 +1,7 @@
 <div class="chatbot-container">
   <div class="chatbot-content">
     <app-title-top-bar [title]="title"></app-title-top-bar>
-    <app-message-list class="message-list"  [messageList]="messageList"></app-message-list>
+    <app-message-list #messageListTarget class="message-list"  [messageList]="messageList"></app-message-list>
 
     <app-message-box class="message-box" (sendMessage)="sendMessage($event)"></app-message-box>
   </div>

@@ -9,9 +9,6 @@
 }
 
 .chatbot-content {
-  //display: flex;
-  //flex-direction: column;
-
   display:grid;
   grid-template-rows:auto 1fr auto;
   grid-template-columns:100%;
@@ -24,8 +21,7 @@
 
 .message-list {
   height: 100%;
-  //margin-bottom: auto;
-  overflow-y: auto;
+  overflow-y: hidden;
   -ms-overflow-style: none; 
   scrollbar-width: none;
 }

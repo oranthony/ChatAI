@@ -1,4 +1,4 @@
-<div id="message-list-container">
+<div #messageListTarget id="message-list-container">
     <div class="container" *ngFor="let message of messageList">
       <div *ngIf="message.isAnswer else elseBlock">
         <div class="answer-container">

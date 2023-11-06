@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output, SimpleChange, SimpleChanges, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output, SimpleChange, SimpleChanges, ViewChild } from '@angular/core';
 import { TextMessage } from 'src/app/common/models/text-message';
 import { ChangeDetectorRef } from '@angular/core';
 
@@ -10,6 +10,8 @@ import { ChangeDetectorRef } from '@angular/core';
 export class MessageListComponent {
 
   @Input() messageList: TextMessage[] = [];
+  @ViewChild('messageListTarget', { read: ElementRef, static:false })
+  private myScrollContainer!: ElementRef;
 
   hasNewMessageArrived: boolean = false;
 
@@ -17,24 +19,6 @@ export class MessageListComponent {
   AIUserIcon: string;
 
   _messageList: TextMessage[] = [];
-
-  /*@Input() 
-  set messageList(messageList: TextMessage[]) {
-    console.log("test");
-    this._messageList = [...messageList];
-    if(!messageList) return;
-    this.messageList = messageList;
-    
-    /*if (messageList && messageList.length != this.messageList.length) {
-      this.scrollToBottom();
-    }
-    this.messageList = messageList;*/
-    
-  //}
-  /*get messageList() {
-    return this._messageList;
-  }*/
-
   
 
   ngOnChanges(changes: SimpleChanges) {
@@ -43,33 +27,29 @@ export class MessageListComponent {
       console.log("value changed");
       this.hasNewMessageArrived = true;
     }
-    
   }
 
   ngAfterViewChecked(){
     // Scroll to bottom when new message has arrived
     if (this.hasNewMessageArrived) {
       this.hasNewMessageArrived = false;
-      //this.scrollToBottom();
+      this.scrollToBottom();
     }
     
   }
-
 
   constructor(private cdRef:ChangeDetectorRef) {
     this.AIProfileIcon = '/assets/logo-short-bw-2.png';
     this.AIUserIcon = '/assets/user-picture.jpg';
-
-    
   }
 
+  // Scroll list to bottom of ViewChild
   scrollToBottom(): void {
-    console.log("scroll called")
-    const messageListBox = document.getElementById('message-list-container');
-    
-    if (messageListBox) {
-      messageListBox!.scrollTop = messageListBox?.scrollHeight;
-    }
+    this.myScrollContainer.nativeElement.scroll({
+      top: this.myScrollContainer.nativeElement.scrollHeight,
+      left: 0,
+      behavior: 'smooth'
+    });
     
   }
 }

@@ -16,8 +16,7 @@ export class ChatbotContainerComponent {
   messageList: TextMessage[] = [];
   title: string = "Chatbot  AI";
 
-  @ViewChild('messageListTarget', { read: ElementRef, static:false })
-  private myScrollContainer!: ElementRef;
+
   
   constructor(private chatbotService: ChatbotService) {
     this.messageList = exampleTextMessage;
@@ -30,38 +29,14 @@ export class ChatbotContainerComponent {
     } ;
 
     this.messageList.push(userMessage);
-    //this.scrollToBottom();
-    setTimeout(()=>{                          
-      this.scrollToBottom();
-    }, 100);
+    this.messageList = [...this.messageList];
     
     this.chatbotService.post(message).subscribe(
       ((value: TextMessage) => {
         this.messageList.push(value);
-        setTimeout(()=>{                          
-          this.scrollToBottom();
-      }, 100);
-        
+        this.messageList = [...this.messageList];
       })
     )
-  }
-
-  scrollToBottom(): void {
-    console.log("scroll called");
-
-    this.myScrollContainer.nativeElement.scroll({
-      top: this.myScrollContainer.nativeElement.scrollHeight,
-      left: 0,
-      behavior: 'smooth'
-    });
-
-    /*
-    const messageListBox = document.getElementById('message-list-container');
-    
-    if (messageListBox) {
-      messageListBox!.scrollTop = messageListBox?.scrollHeight;
-    }*/
-    
   }
 
 }

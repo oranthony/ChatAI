@@ -3,13 +3,14 @@
   border-radius: 15px;
   padding-left: 15px;
   padding-right: 15px;
-  //-ms-overflow-style: none; 
-  //scrollbar-width: none;
+  overflow-y: scroll;
+  -ms-overflow-style: none; 
+  scrollbar-width: none;
 }
 
-/*#message-list-container::-webkit-scrollbar { 
+#message-list-container::-webkit-scrollbar { 
   display: none;
-}*/
+}
 
 .container {
   display: flex;

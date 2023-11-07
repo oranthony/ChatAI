@@ -2,6 +2,8 @@
 
 This is a chatbot using Facebook BlenderBot (400M) and soon LLaMA.
 
+Hosted on : https://chat.loroscio.com/
+
 ## List of features
 
 - Chatbot with Facebook BlenderBot AI (soon other models)
@@ -17,7 +19,7 @@ The chatbot features auto-scroll: when a new message is displayed, the list scro
 
 ## Demo Video
 
-
+https://github.com/oranthony/ChatAI/assets/6161861/ae3eb1b7-a02f-4cf5-a171-3761e7a1aa7a
 
 ## Development server
 

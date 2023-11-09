@@ -1,6 +1,10 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 
+/**
+ * Service that allows any component to trigger (open) the side navigation drawer
+ */
+
 @Injectable({
   providedIn: 'root'
 })

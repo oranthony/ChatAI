@@ -1,5 +1,5 @@
 <div class="message-box-container">
-<form #form="ngForm" class="message-box-form" (submit)="_sendMessage()">
+<form #form="ngForm" class="message-box-form" (submit)="onSendMessage()">
   <!--<mat-form-field>-->
   <textarea 
     matInput
@@ -10,12 +10,12 @@
     class="message-box-input" 
     id="message-box-input" 
     placeholder="Start typing" name="user-question" 
-    [(ngModel)]="question" (keyup.enter)="_sendMessage()" (keydown.enter)="onKeydown($event)" > </textarea> 
+    [(ngModel)]="question" (keyup.enter)="onSendMessage()" (keydown.enter)="onKeydown($event)" > </textarea> 
   <!--</mat-form-field>-->
 </form>
 
 <div class="button-send-container">
-<button class="button-send" (click)="_sendMessage()">
+<button class="button-send" (click)="onSendMessage()">
   <img class="button-send-picture" [src]="ImagePath" height="23">
 </button>
 </div>

@@ -22,7 +22,7 @@ export class ChatbotContainerComponent {
     //this.messageList = exampleTextMessage;
   }
 
-  sendMessage(message: string) {
+  onSendMessage(message: string) {
     let userMessage: TextMessage = {
       isAnswer: false,
       text: message

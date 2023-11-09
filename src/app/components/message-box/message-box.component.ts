@@ -25,29 +25,14 @@ export class MessageBoxComponent {
     this._ngZone.onStable.pipe(take(1)).subscribe(() => this.autosize.resizeToFitContent(true));
   }
 
-  _sendMessage() {
+  onSendMessage() {
     if (this.question != '') {
       this.sendMessage.emit(this.question);
       this.question = "";
-      //this.triggerResize();
     }
   }
 
   onKeydown(event: Event){
     event.preventDefault();
   }
-
-  /*onMessageBoxInputChanged(event: Event) {
-    console.log("typed");
-    if (this.messageBoxInput){
-      console.log("entered");
-      
-      //this.messageBoxInput.style.height = `${this.messageBoxInputInitHeigh}px`;
-      //this.messageBoxInput.style.height = `${this.messageBoxInput?.scrollHeight}px`;
-
-      console.log("messageBoxInputHeigh " + this.messageBoxInputInitHeigh);
-      console.log("scrollHeight " + this.messageBoxInput?.scrollHeight);
-    }
-
-  }*/
 }

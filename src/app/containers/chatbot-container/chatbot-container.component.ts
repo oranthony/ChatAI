@@ -1,5 +1,6 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { Observable, tap } from 'rxjs';
+import { ErrorMessageState, LoadingMessageState, MessageState, SuccessMessageState } from 'src/app/common/models/message-state';
 import { TextMessage } from 'src/app/common/models/text-message';
 import { ChatbotService } from 'src/app/common/services/chatbot.service';
 import { environment } from 'src/environments/environment';
@@ -15,14 +16,19 @@ export class ChatbotContainerComponent {
   //message$!: Observable<TextMessage[]>;
   messageList: TextMessage[] = [];
   title: string = "Chatbot  AI";
+  messageState!: MessageState;
 
-
+  private static successMessageState: SuccessMessageState = {state: "Success"};
+  private static loadingMessageState: LoadingMessageState = {state: "Loading"};
   
   constructor(private chatbotService: ChatbotService) {
-    //this.messageList = exampleTextMessage;
+    // Initialize message status with success value
+    this.messageState = ChatbotContainerComponent.successMessageState;
   }
 
   onSendMessage(message: string) {
+    this.messageState = ChatbotContainerComponent.loadingMessageState;
+
     let userMessage: TextMessage = {
       isAnswer: false,
       text: message
@@ -32,11 +38,23 @@ export class ChatbotContainerComponent {
     this.messageList = [...this.messageList];
     
     this.chatbotService.post(message).subscribe(
-      ((value: TextMessage) => {
+      res => {
+        this.messageList.push(res);
+        this.messageList = [...this.messageList];
+        this.messageState = ChatbotContainerComponent.successMessageState;
+      },
+      err => {
+        let errorMessageState: ErrorMessageState = {state: "Error", error: {message: err}};
+        this.messageState = errorMessageState;
+      }
+    );
+
+      /*((value: TextMessage) => {
         this.messageList.push(value);
         this.messageList = [...this.messageList];
+        this.messageState = ChatbotContainerComponent.successMessageState;;
       })
-    )
+    )*/
   }
 
 }

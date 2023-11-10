@@ -13,11 +13,19 @@
           <div class="question-container">
             <div class="question">{{ message.text }} </div>
             <div class="user-profile-icon-container">
-              <img class="user-profile-icon" [src]="AIUserIcon">
+              <img class="user-profile-icon" [src]="UserIcon">
             </div>
           </div>
         </span>
       </ng-template>
+    </div>
+    <div [ngSwitch]="messageState.state">
+      <div *ngSwitchCase="'Loading'">
+        <app-loading-message></app-loading-message>
+      </div>
+      <div *ngSwitchCase="'Error'">
+        <app-error-message></app-error-message>
+      </div>
     </div>
 </div>
 

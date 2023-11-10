@@ -20,6 +20,8 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { TextFieldModule } from '@angular/cdk/text-field';
 import { TitleTopBarComponent } from './components/title-top-bar/title-top-bar.component';
+import { LoadingMessageComponent } from './components/loading-message/loading-message.component';
+import { ErrorMessageComponent } from './components/error-message/error-message.component';
 
 
 
@@ -33,6 +35,8 @@ import { TitleTopBarComponent } from './components/title-top-bar/title-top-bar.c
     PictureGenContainerComponent,
     HomeComponent,
     TitleTopBarComponent,
+    LoadingMessageComponent,
+    ErrorMessageComponent,
     
   ],
   imports: [

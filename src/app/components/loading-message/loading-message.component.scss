@@ -1,0 +1,25 @@
+.loading-message-container {
+  display: flex;
+  align-items: center;
+}
+
+.ai-profile-icon-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  width: 55px;
+  height: 55px;
+  margin-right: 15px;
+  background-color: #24252d;
+  border-radius: 15px;
+}
+
+.ai-profile-icon {
+  height: 55px;
+}
+
+.loading-message {
+  font-size: 1.25rem;
+  color: #8d8c8c;
+}

@@ -1,5 +1,5 @@
 import { CdkTextareaAutosize } from '@angular/cdk/text-field';
-import { Component, EventEmitter, Input, NgZone, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, NgZone, OnInit, Output, ViewChild } from '@angular/core';
 import {take} from 'rxjs/operators';
 
 @Component({
@@ -12,6 +12,9 @@ export class MessageBoxComponent {
 
   @ViewChild('autosize')
   autosize!: CdkTextareaAutosize;
+
+  @ViewChild('formInput')
+  formInput!: ElementRef;
   
   question: string = "";
   ImagePath: string;
@@ -30,9 +33,13 @@ export class MessageBoxComponent {
       this.sendMessage.emit(this.question);
       this.question = "";
     }
+
+    // Dismiss keyboard on iOS Safari Webkit
+    this.formInput.nativeElement.blur();
   }
 
   onKeydown(event: Event){
+    // Prevent enter key from creating a new line
     event.preventDefault();
   }
 }

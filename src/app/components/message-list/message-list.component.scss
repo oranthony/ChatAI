@@ -1,4 +1,6 @@
 #message-list-container {
+  container-type: inline-size;
+  container-name: messageListContainer;
   height: 100%;
   border-radius: 15px;
   padding-left: 15px;
@@ -15,77 +17,91 @@
 .container {
   display: flex;
   flex-direction: column;
-  padding-top: 45px;
+  padding-top: 25px;
 }
 
 .answer-container, .question-container {
   border-radius: 15px;
   width: fit-content;
   min-height: 45px;
-  min-width: 100px;
+  min-width: 86px;
   max-width: 650px;
-  margin-bottom: 45px;
+  margin-bottom: 15px;
 }
 
 .question-container {
   align-items: flex-end;
+  position: relative;
+  float: right;
+}
+
+.answer, .question {
+  border-radius: 15px;
+  padding-top: 15px;
+  padding-bottom: 24px;
+  padding-left: 15px;
+  padding-right: 15px;
+  font-size: 1.15rem;
 }
 
 .answer {
   background-color: #f3f5f7;
-  border-radius: 15px;
-  padding-top: 25px;
-  padding-bottom: 30px;
-  padding-left: 25px;
-  padding-right: 25px;
-  font-size: 1.25rem;
-}
-
-.ai-profile-icon-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-  margin-top: -18px;
-  margin-left: 20px;
-  width: 55px;
-  height: 55px;
-  background-color: #24252d;
-  border-radius: 15px;
-}
-
-.question-container {
-  position: relative;
-  float: right;
 }
 
 .question {
-    background-color: white;
-    border-style: solid;
-    border-color: #f3f5f7;
-    border-width: 2px;
-    border-radius: 15px;
-    padding-top: 25px;
-    padding-bottom: 30px;
-    padding-left: 25px;
-    padding-right: 25px;
-    font-size: 1.25rem;
+  background-color: white;
+  border-style: solid;
+  border-color: #f3f5f7;
+  border-width: 2px;
 }
 
-.user-profile-icon-container {
+.ai-profile-icon-container, .user-profile-icon-container {
   display: flex;
   justify-content: center;
   align-items: center;
   position: relative;
-  float: right;
+  width: 48px;
+  height: 48px;
   margin-top: -18px;
-  margin-right: 20px;
-  width: 55px;
-  height: 55px;
   border-radius: 15px;
+}
+
+.ai-profile-icon-container {
+  margin-left: 20px;
+  background-color: #24252d;
+}
+
+.user-profile-icon-container {
+  float: right;
+  margin-right: 20px;
 }
 
 .user-profile-icon {
   width: 100%;
   border-radius: 15px;
+}
+
+@container messageListContainer (min-width: 535px) {
+  .container {
+    padding-top: 45px;
+  }
+
+  .answer-container, .question-container {
+    margin-bottom: 45px;
+    min-width: 100px;
+  }
+
+  .answer, .question {
+    padding-top: 25px;
+    padding-bottom: 30px;
+    padding-left: 25px;
+    padding-right: 25px;
+    font-size: 1.15rem;
+  }
+
+  .ai-profile-icon-container, .user-profile-icon-container {
+    width: 55px;
+    height: 55px;
+    margin-top: -18px;
+  }
 }

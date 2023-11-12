@@ -27,8 +27,6 @@ export class MessageListComponent {
       console.log("value changed");
       this.hasNewMessageArrived = true;
     }
-
-    this.checkMessageState();
   }
 
   ngAfterViewChecked(){
@@ -44,23 +42,6 @@ export class MessageListComponent {
     this.UserIcon = '/assets/user-picture.jpg';
     let success: SuccessMessageState = {state: "Success"};
     this.messageState = success;
-  }
-
-  checkMessageState() {
-    // Check for loading state
-    if (this.messageState.state == "Loading") {
-      console.log("loading");
-    }
-
-    // Check for success state
-    if (this.messageState.state == "Success") {
-      console.log("success");
-    }
-
-    // Check for error state
-    if (this.messageState.state == "Error") {
-      console.log("Error");
-    }
   }
 
   // Scroll list to bottom of ViewChild

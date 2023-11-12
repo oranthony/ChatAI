@@ -71,6 +71,10 @@
   background-color: #24252d;
 }
 
+.ai-profile-icon {
+  height: 38px;
+}
+
 .user-profile-icon-container {
   float: right;
   margin-right: 20px;
@@ -103,5 +107,9 @@
     width: 55px;
     height: 55px;
     margin-top: -18px;
+  }
+
+  .ai-profile-icon {
+    height: 42px;
   }
 }

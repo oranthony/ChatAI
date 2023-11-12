@@ -3,6 +3,6 @@
     <app-title-top-bar [title]="title"></app-title-top-bar>
     <app-message-list #messageListTarget class="message-list" [messageList]="messageList" [messageState]="messageState"></app-message-list>
 
-    <app-message-box class="message-box" (sendMessage)="onSendMessage($event)"></app-message-box>
+    <app-message-box class="message-box" [messageState]="messageState" (sendMessage)="onSendMessage($event)"></app-message-box>
   </div>
 </div>

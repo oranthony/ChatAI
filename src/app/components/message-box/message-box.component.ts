@@ -1,6 +1,7 @@
 import { CdkTextareaAutosize } from '@angular/cdk/text-field';
 import { Component, ElementRef, EventEmitter, Input, NgZone, OnInit, Output, ViewChild } from '@angular/core';
 import {take} from 'rxjs/operators';
+import { MessageState } from 'src/app/common/models/message-state';
 
 @Component({
   selector: 'app-message-box',
@@ -8,6 +9,7 @@ import {take} from 'rxjs/operators';
   styleUrls: ['./message-box.component.scss']
 })
 export class MessageBoxComponent {
+  @Input() messageState!: MessageState;
   @Output() sendMessage = new EventEmitter();
 
   @ViewChild('autosize')

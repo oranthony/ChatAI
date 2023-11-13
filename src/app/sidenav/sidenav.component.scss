@@ -40,12 +40,15 @@
     color: #f6f6f7;
 }
 
+a {
+    color: #f6f6f7;
+}
 
 .side-nav-icon {
     font-size: 30px;
     height: 30px;
     width: 30px;
-    color: #f6f6f7;
+    color: inherit;
 }
 
 .side-nav-link {
@@ -76,6 +79,13 @@
 .mat-drawer-side {
     border-right-style: none;
 }
+
+.nav-link {
+    &.active-list-item {
+        color: orange;
+    }
+}
+
 
 @media only screen and (min-width: 700px) {
     .nav-close-icon {

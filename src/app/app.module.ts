@@ -37,7 +37,6 @@ import { ErrorMessageComponent } from './components/error-message/error-message.
     TitleTopBarComponent,
     LoadingMessageComponent,
     ErrorMessageComponent,
-    
   ],
   imports: [
     AppRoutingModule,
@@ -50,6 +49,7 @@ import { ErrorMessageComponent } from './components/error-message/error-message.
     MatInputModule,
     FormsModule,
     TextFieldModule,
+    
   ],
   providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}],
   bootstrap: [AppComponent]

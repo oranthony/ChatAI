@@ -13,7 +13,8 @@ const RESPONSIVE_WIDTH = 700;
   styleUrls: ['./sidenav.component.scss']
 })
 export class SidenavComponent {
-  ImagePath: string;
+  imagePath: string;
+  homeIconPath: string;
   openEventsubscription: Subscription;
   isExpanded = true;
 
@@ -25,7 +26,8 @@ export class SidenavComponent {
 
   constructor(private navigationService: NavigationService) {
     this.getScreenSize();
-    this.ImagePath = '/assets/logo-short-no-bg.png';
+    this.imagePath = '/assets/logo-short-no-bg.png';
+    this.homeIconPath = "/assets/icons/home-alt.svg";
     this.openEventsubscription = this.navigationService.getOpenNavDrawerEvent().subscribe(()=>{
       console.log("1");
       this.openNav();

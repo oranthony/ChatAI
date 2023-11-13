@@ -1,4 +1,4 @@
-.example-container {
+.sidenav-container {
     height: 100%;
     background-color: #24252d;
 }
@@ -60,10 +60,6 @@ a {
     padding-right: 15px;
 }
 
-.side-nav-closed {
-
-}
-
 .nav-close-icon {
     font-size: 30px;
     height: 30px;
@@ -107,12 +103,12 @@ a {
 }
 
 @media only screen and (max-width: 700px) {
-    .example-container  {
+    .sidenav-container  {
         position: absolute;
         width: 100%;
     }
 
-    .example-sidenav {
+    .sidenav-drawer {
         width: 100%;
     }
 
@@ -140,7 +136,7 @@ a {
         margin-bottom: 5vh;
     }
 
-    .example-sidenav nav{
+    .sidenav-drawer nav{
         display: flex;
         flex-direction: column;
         align-items: center;

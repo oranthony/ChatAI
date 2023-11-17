@@ -1,0 +1,21 @@
+{
+  "models": 
+  [
+    {
+      "name" : "BlenderBot",
+      "author": "Facebook",
+      "dataSize": "400M",
+      "description": [
+         "The Blender chatbot model (BlenderBot 1.0) was first proposed in the paper, Recipes for building an open-domain chatbot on 30th April 2020. This is a deep learning model that has been trained to interact and respond like a conversational agent."
+        ,
+        "The latest release is the BlenderBot 2.0. The model uses a standard seq2seq model transformer-based architecture to generate responses. This architecture uses Transformers as its base, initially proposed in a paper by Google’s research team."
+      ],
+      "link": "https://huggingface.co/facebook/blenderbot-400M-distill?text=Hey+my+name+is+Julien%21+How+are+you%3F"
+    },
+    {
+      "name": "LLaMA",
+      "author": "Facebook",
+      "dataSize": "7B"
+    }
+  ]
+}

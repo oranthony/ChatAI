@@ -1,0 +1,15 @@
+<div class="container" *ngIf="selectedModel != null">
+  <div class="title-block">
+    <span class="title">{{selectedModel.name}}</span>
+    <span class="subtitle">{{selectedModel.dataSize}} paremeters</span>
+  </div>
+  <div class="description-block">
+    <p class="description-content" *ngFor="let description of selectedModel.description">
+      {{description}}
+    </p>
+    <a [href]="selectedModel.link" class="description-link">
+      <span>More information</span>
+      <mat-icon>launch</mat-icon>
+    </a>
+  </div>
+</div>

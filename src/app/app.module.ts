@@ -22,6 +22,7 @@ import { TextFieldModule } from '@angular/cdk/text-field';
 import { TitleTopBarComponent } from './components/title-top-bar/title-top-bar.component';
 import { LoadingMessageComponent } from './components/loading-message/loading-message.component';
 import { ErrorMessageComponent } from './components/error-message/error-message.component';
+import { AiModelDetailComponent } from './components/ai-model-detail/ai-model-detail.component';
 
 
 
@@ -37,6 +38,7 @@ import { ErrorMessageComponent } from './components/error-message/error-message.
     TitleTopBarComponent,
     LoadingMessageComponent,
     ErrorMessageComponent,
+    AiModelDetailComponent,
   ],
   imports: [
     AppRoutingModule,

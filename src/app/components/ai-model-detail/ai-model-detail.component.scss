@@ -1,0 +1,65 @@
+.container {
+  //min-width: 330px;
+  //max-width: 25vw;
+  container-type: inline-size;
+  container-name: ai-model-detail-container;
+  padding-left: 25px;
+  padding-right: 25px;
+}
+
+.title-block {
+  margin-top: 60px;
+  margin-bottom: 40px;
+}
+
+.title, .subtitle {
+  display: flex;
+  justify-content: center;
+}
+
+.title {
+  font-size: 1.8rem;
+  font-family: 'Gilroy-Medium', sans-serif;
+}
+
+.subtitle {
+  font-size: 0.95rem;
+  font-family: 'Gilroy-Light', sans-serif;
+  margin-top: 10px;
+}
+
+.description-block {
+  margin-right: 3%;
+  font-size: 0.95rem;
+  font-family: 'Gilroy-Regular', sans-serif;
+  max-width: 280px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.description-link {
+  display: flex;
+  margin-top: 20px;
+  color: rgb(99, 99, 214);
+}
+
+.description-link > span {
+  text-decoration: underline;
+}
+
+.description-link > mat-icon {
+  font-size: 0.95rem;
+  margin-left: 5px;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+@container ai-model-detail-container (min-width: 424px) {
+  .description-block {
+    max-width: 80%;
+  }
+}

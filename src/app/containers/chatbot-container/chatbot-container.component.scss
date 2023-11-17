@@ -1,4 +1,6 @@
 .chatbot-container {
+  container-type: inline-size;
+  container-name: chatbot-container;
   height: 100%;
   width: 100%;
   display: flex;
@@ -12,9 +14,7 @@
   display:grid;
   grid-template-rows:auto 1fr auto;
   grid-template-columns:100%;
-
   width: 100%;
-  max-width: 1300px;
   background-color: white;
   box-shadow: 0 9px 0px 0px white, 0 -9px 0px 0px white, 12px 0 15px -4px rgba(194, 194, 194, 0.8), -12px 0 15px -4px rgba(194, 194, 194, 0.8);
 }
@@ -28,4 +28,29 @@
 
 .message-list::-webkit-scrollbar { 
   display: none;
+}
+
+.ai-model-detail {
+  max-width: 480px;
+}
+
+
+@container chatbot-container (max-width: 972px) {
+  .ai-model-detail {
+    display: none;
+  }
+}
+
+@container chatbot-container (min-width: 972px) and (max-width: 1599px) {
+  .ai-model-detail {
+    width: 34%;
+  }
+}
+
+
+@container chatbot-container (min-width: 1600px) {
+  .ai-model-detail {
+    //width: 40%;
+    width: 34%;
+  }
 }

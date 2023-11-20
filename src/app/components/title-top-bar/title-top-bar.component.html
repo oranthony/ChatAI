@@ -5,5 +5,17 @@
   <div class="title">
     {{title}}
   </div>
+  <div class="model-select-dropdown">
+    <div mat-icon-button [matMenuTriggerFor]="menu" aria-label="Select a model">
+      <mat-icon>settings</mat-icon>
+    </div>
+    
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item *ngFor="let model of modelList" (click)="onSelectedModel(model)">
+        <mat-icon [ngClass]="{'hide-icon' : model != selectedModel}">check</mat-icon>
+        <span>{{model}}</span>
+      </button>
+    </mat-menu>
+  </div>
   
 </div>

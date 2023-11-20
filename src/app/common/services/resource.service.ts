@@ -10,10 +10,9 @@ import { catchError, map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export abstract class ResourceService<T> {
-  private readonly APIUrl = environment.apiUrl;
   private readonly APIKey = environment.apiKey;
 
-  constructor(protected httpClient: HttpClient ) {
+  constructor(protected httpClient: HttpClient) {
   }
 
   abstract getResourceUrl(): string;
@@ -41,32 +40,18 @@ export abstract class ResourceService<T> {
   }
   */
 
+  // Override this to cast the answer into the right type
   fromServerModel(json: any): T {
     return json;
   }
 
 
-  getRequestOptions(content: string) {
-    //var headers = new HttpHeaders({'Authorization' : `Bearer ${this.APIKey}`});
-    var headers = {'Authorization' : `Bearer ${this.APIKey}`};
-    var options = {      
-      headers: headers,
-      method: "POST",
-      body: JSON.stringify(content), 
-    };
 
-    console.log(options);
-    return options;
-}
 
   post(message: string): Observable<T> {
-    //TODO: add token, headers...
-    console.log("log from resource service");
-    console.log(this.APIUrl);
+    var headers = new HttpHeaders({ 'Authorization': `Bearer ${this.APIKey}`, 'Content-Type': 'application/json' });
 
-    var headers = new HttpHeaders({'Authorization' : `Bearer ${this.APIKey}`});
-
-    return this.httpClient.post<T>(this.APIUrl, JSON.stringify(message), {headers})
+    return this.httpClient.post<T>(this.getResourceUrl(), message, { headers })
       .pipe(
         map((json) => this.fromServerModel(json)),
         catchError(this.handleError)

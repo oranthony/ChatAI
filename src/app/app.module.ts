@@ -16,7 +16,9 @@ import { MessageBoxComponent } from './components/message-box/message-box.compon
 import { PictureGenContainerComponent } from './containers/picture-gen-container/picture-gen-container.component';
 import { HomeComponent } from './home/home.component';
 import { FormsModule } from '@angular/forms';
-import {MatFormFieldModule} from '@angular/material/form-field';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
+import { MatMenuModule } from '@angular/material/menu';
 import { MatInputModule } from '@angular/material/input';
 import { TextFieldModule } from '@angular/cdk/text-field';
 import { TitleTopBarComponent } from './components/title-top-bar/title-top-bar.component';
@@ -51,7 +53,8 @@ import { AiModelDetailComponent } from './components/ai-model-detail/ai-model-de
     MatInputModule,
     FormsModule,
     TextFieldModule,
-    
+    MatSelectModule,
+    MatMenuModule
   ],
   providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}],
   bootstrap: [AppComponent]

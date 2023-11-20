@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { NavigationService } from 'src/app/common/services/navigation.service';
 
 @Component({
@@ -8,13 +8,21 @@ import { NavigationService } from 'src/app/common/services/navigation.service';
 })
 export class TitleTopBarComponent {
   @Input() title: string = "";
+  @Input() modelList!: string[];
+  @Input() selectedModel!: string;
 
-  constructor(private navigationService: NavigationService) {
-    
-  }
+  // Output selected model
+  @Output() choosenModel = new EventEmitter();
+
+
+  constructor(private navigationService: NavigationService) {}
+
 
   openNavBar() {
-    console.log("yes");
     this.navigationService.openNavDrawer();
+  }
+  
+  onSelectedModel(model: string) {
+    this.choosenModel.emit(model);
   }
 }

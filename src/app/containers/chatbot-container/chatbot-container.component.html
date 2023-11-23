@@ -1,6 +1,7 @@
 <div class="chatbot-container">
   <div class="chatbot-content">
-    <app-title-top-bar [title]="title" [modelList]="modelList" [selectedModel]="selectedModel" (choosenModel)="onChoosenModel($event)"></app-title-top-bar>
+    <app-title-top-bar [title]="title" [modelList]="modelList" [selectedModel]="selectedModel"
+      (choosenModel)="onChoosenModel($event)"></app-title-top-bar>
     <app-message-list #messageListTarget class="message-list" [messageList]="messageList"
       [messageState]="messageState"></app-message-list>
 

@@ -1,6 +1,9 @@
 <div #messageListTarget id="message-list-container">
-    <div class="container" *ngFor="let message of messageList">
-      <div *ngIf="message.isAnswer else elseBlock">
+  <div class="container" *ngFor="let message of messageList">
+    <!-- If it's an answer we display it on the left -->
+    <div *ngIf="message.isAnswer else elseBlockUserMessage">
+      <!-- If it's a text message we display a text in a bubble -->
+      <div *ngIf="message.type == 'text' else elseBlockPictureMessage">
         <div class="answer-container">
           <div class="answer">{{ message.text }}</div>
           <div class="ai-profile-icon-container">
@@ -8,27 +11,43 @@
           </div>
         </div>
       </div>
-      <ng-template #elseBlock>
-        <span>
-          <div class="question-container">
-            <div class="question">{{ message.text }} </div>
-            <div class="user-profile-icon-container">
-              <img class="user-profile-icon" [src]="UserIcon">
-            </div>
+      <!-- If it's a picture message we display the picture as a thumbnail -->
+      <ng-template #elseBlockPictureMessage>
+        <div class="answer-container">
+          <!--<div class="answer">{{ castMessageAsPictureMessage(message).picture }}</div>-->
+          <img class="generated-picture" [src]='castMessageAsPictureMessage(message).picture'
+            (click)="showPictureFullPage(castMessageAsPictureMessage(message).picture)" />
+          <div class="ai-profile-icon-container">
+            <img class="ai-profile-icon" [src]="AIProfileIcon">
           </div>
-        </span>
+        </div>
       </ng-template>
     </div>
-    <div [ngSwitch]="messageState.state">
-      <div *ngSwitchCase="'Loading'">
-        <app-loading-message></app-loading-message>
-      </div>
-      <div *ngSwitchCase="'Error'">
-        <app-error-message></app-error-message>
-      </div>
+
+    <!-- If it's not an answer it's a question by the user so display on the right-->
+    <ng-template #elseBlockUserMessage>
+      <span>
+        <div class="question-container">
+          <div class="question">{{ castMessageAsTextMessage(message).text }} </div>
+          <div class="user-profile-icon-container">
+            <img class="user-profile-icon" [src]="UserIcon">
+          </div>
+        </div>
+      </span>
+    </ng-template>
+  </div>
+
+  <div [ngSwitch]="messageState.state">
+    <div *ngSwitchCase="'Loading'">
+      <app-loading-message></app-loading-message>
     </div>
+    <div *ngSwitchCase="'Error'">
+      <app-error-message></app-error-message>
+    </div>
+  </div>
 </div>
 
-
-
-
+<div class="fullpagePictureContainer" *ngIf="isPictureFullScreen" (click)="closeFullScreenPicture()">
+  <mat-icon class="close-icon">close</mat-icon>
+  <img id="fullpagePicture" #fullpagePicture [src]="fullScreenPictureUrl"/>
+</div>

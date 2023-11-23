@@ -10,10 +10,9 @@ import { environment } from 'src/environments/environment';
 })
 
 /**
- * Handles to send and receive textual messages (input: text, output: text)
+ * Used to send and receive textual messages (input: text, output: text)
  */
 export class TextMessageService extends ResourceService<TextMessage> {
-  //private readonly APIUrl = environment.apiUrl;
   private APIUrl?: string;
 
   constructor(protected override httpClient: HttpClient) {
@@ -27,25 +26,19 @@ export class TextMessageService extends ResourceService<TextMessage> {
       //TODO: throw error
       return "";
     }
-    
   }
 
   setReourceUrl(resourceUrl: string) {
     this.APIUrl = resourceUrl;
   }
 
+  // cast the answer into the right type
   override fromServerModel(json: any): TextMessage {
     return {
+      type: "text",
       isAnswer: true,
       text: json.generated_text
     };
   }
-
-  // call the right concrete factory depending on the model
-
-  /*override get(message: string): Observable<TextMessage> {
-   console.log("log from chatbot service");
-   return super.get(message);
-  }*/
 
 }

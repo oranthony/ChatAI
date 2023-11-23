@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse, HttpParams, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpParams, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { TextMessage } from '../models/text-message';
 import { Observable, throwError } from 'rxjs';
@@ -45,11 +45,8 @@ export abstract class ResourceService<T> {
     return json;
   }
 
-
-
-
   post(message: string): Observable<T> {
-    var headers = new HttpHeaders({ 'Authorization': `Bearer ${this.APIKey}`, 'Content-Type': 'application/json' });
+    let headers = this.getHeaders();
 
     return this.httpClient.post<T>(this.getResourceUrl(), message, { headers })
       .pipe(
@@ -58,8 +55,13 @@ export abstract class ResourceService<T> {
       );
   }
 
-  private handleError(error: HttpErrorResponse) {
+  getHeaders(): HttpHeaders {
+    return new HttpHeaders({ 'Authorization': `Bearer ${this.APIKey}`, 'Content-Type': 'application/json'});
+  }
+
+  handleError(error: HttpErrorResponse) {
     //TODO: handle error depending on HuggingFace Inference API
+    console.log(error);
     return throwError('Something wrong happened');
   }
 }

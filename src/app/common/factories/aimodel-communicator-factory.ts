@@ -50,6 +50,12 @@ export class ConcreteBlenderbotCommunicatorCreator extends AiModelCommunicatorCr
   }
 }
 
+export class ConcreteBlenderbot3BCommunicatorCreator extends AiModelCommunicatorCreator {
+  public factoryMethod(): AiModelCommunicator {
+      return new ConcreteBlenderbot3BCommunicator();
+  }
+}
+
 export class ConcreteLlamaCommunicatorCreator extends AiModelCommunicatorCreator {
   public factoryMethod(): AiModelCommunicator {
       return new ConcreteLlamaCommunicator();
@@ -65,6 +71,24 @@ export class ConcreteDialogptCommunicatorCreator extends AiModelCommunicatorCrea
 export class ConcreteFalconCommunicatorCreator extends AiModelCommunicatorCreator {
   public factoryMethod(): AiModelCommunicator {
       return new ConcreteFalconCommunicator();
+  }
+}
+
+export class ConcreteOpenjourneyCommunicatorCreator extends AiModelCommunicatorCreator {
+  public factoryMethod(): AiModelCommunicator {
+      return new ConcreteOpenjourneyCommunicator();
+  }
+}
+
+export class ConcreteStableDiffusionXLCommunicatorCreator extends AiModelCommunicatorCreator {
+  public factoryMethod(): AiModelCommunicator {
+      return new ConcreteStableDiffusionXLCommunicator;
+  }
+}
+
+export class ConcreteStableDiffusion1_5CommunicatorCreator extends AiModelCommunicatorCreator {
+  public factoryMethod(): AiModelCommunicator {
+      return new ConcreteStableDiffusion1_5Communicator;
   }
 }
 
@@ -84,6 +108,18 @@ interface AiModelCommunicator {
  */
 class ConcreteBlenderbotCommunicator implements AiModelCommunicator {
   apiUrl = environment.blenderbotAPIUrl;
+
+  public getAPIUrl(): string {
+      return this.apiUrl;
+  }
+
+  parseArguments(message: string): string {
+    return JSON.stringify(message);
+  }
+}
+
+class ConcreteBlenderbot3BCommunicator implements AiModelCommunicator {
+  apiUrl = environment.blenderbot3BAPIUrl;
 
   public getAPIUrl(): string {
       return this.apiUrl;
@@ -120,6 +156,45 @@ class ConcreteDialogptCommunicator implements AiModelCommunicator {
 
 class ConcreteFalconCommunicator implements AiModelCommunicator {
   apiUrl = environment.falconUrl;
+
+  public getAPIUrl(): string {
+      return this.apiUrl;
+  }
+
+  public parseArguments(message: string): string {
+    console.log(JSON.stringify({inputs: message}));
+    return JSON.stringify({inputs: message});
+  }
+}
+
+class ConcreteOpenjourneyCommunicator implements AiModelCommunicator {
+  apiUrl = environment.openjourneyUrl;
+
+  public getAPIUrl(): string {
+      return this.apiUrl;
+  }
+
+  public parseArguments(message: string): string {
+    console.log(JSON.stringify({inputs: message}));
+    return JSON.stringify({inputs: message});
+  }
+}
+
+class ConcreteStableDiffusionXLCommunicator implements AiModelCommunicator {
+  apiUrl = environment.stableDiffusionXlUrl;
+
+  public getAPIUrl(): string {
+      return this.apiUrl;
+  }
+
+  public parseArguments(message: string): string {
+    console.log(JSON.stringify({inputs: message}));
+    return JSON.stringify({inputs: message});
+  }
+}
+
+class ConcreteStableDiffusion1_5Communicator implements AiModelCommunicator {
+  apiUrl = environment.stableDiffusion1_5Url;
 
   public getAPIUrl(): string {
       return this.apiUrl;

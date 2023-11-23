@@ -3,7 +3,7 @@ import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ModelDetailsService } from 'src/app/common/services/model-details.service';
 import { Model, Models } from 'src/app/common/models/ai-model-details';
-import { modelsName } from 'src/environments/environment.development';
+import { conversationalModelsName } from 'src/environments/environment.development';
 
 @Component({
   selector: 'app-ai-model-detail',
@@ -13,6 +13,7 @@ import { modelsName } from 'src/environments/environment.development';
 export class AiModelDetailComponent implements OnInit {
 
   @Input() selectedModelName!: string;
+  modelList!: Models;
   selectedModel!: Model;
   blenderBotModel!: Model;
   blenderBot3BModel!: Model;
@@ -25,60 +26,43 @@ export class AiModelDetailComponent implements OnInit {
   ngOnInit() {
     // Load model information from local JSON
     this.modelDetailsService.getJSON().subscribe(data => {
-      this.bindLocalData(data)
-      this.selectedModel = this.blenderBotModel;
+      this.modelList = data;
+      // Once all models are loaded we assign the right model
+      if (this.selectedModelName) {
+        let selectedModel = this.getModelByName(this.selectedModelName);
+        if (selectedModel) {
+          this.selectedModel = selectedModel;
+        }
+      }
     })
   }
 
   ngOnChanges(changes: SimpleChanges) {
     // Detect when user select a different model
     if (changes['selectedModelName'].previousValue != changes['selectedModelName'].currentValue) {
-      // Change selectedModelName with new model name
-      this.changeSelectedModel(changes["selectedModelName"].currentValue);
+      // Change selectedModelName with new model name. This is triggered always after user change, not at component init.
+      if(this.modelList) {
+        this.changeSelectedModel(changes["selectedModelName"].currentValue);
+      }
     }
-    
-  }
-
-  // Assign model data stored in asset to local variables.
-  bindLocalData(modelList: Models) {
-    modelList.models.forEach(model => {
-      //TODO: change manual binding to map through the modelList automatically
-      if (model.name == modelsName.BLENDER_BOT) {
-        this.blenderBotModel = model;
-      }
-
-      if (model.name == modelsName.BLENDER_BOT_3B) {
-        this.blenderBot3BModel = model;
-      }
-
-      if (model.name == modelsName.DIALOGPT) {
-        this.dialoGptModel = model;
-      }
-
-      /*if (model.name == modelsName.LLAMA) {
-        this.LLaMAModel = model;
-      }*/
-    });
   }
 
   // Change current model
-  changeSelectedModel(model: string) {
-    if (model == modelsName.BLENDER_BOT) {
-      this.selectedModel = this.blenderBotModel;
+  changeSelectedModel(modelName: string) {
+    let selectedModel = this.getModelByName(modelName);
+    if (selectedModel) {
+      this.selectedModel = selectedModel;
     }
+  }
 
-    if(model == modelsName.BLENDER_BOT_3B) {
-      this.selectedModel = this.blenderBot3BModel;
+  getModelByName(modelName: string): Model | undefined {
+    for (let model of this.modelList.models) {
+      if (model.name == modelName) {
+        return model;
+      }
     }
-
-    if(model == modelsName.DIALOGPT) {
-      this.selectedModel = this.dialoGptModel;
-    }
-
-
-    /*if (model == modelsName.LLAMA) {
-      this.selectedModel = this.LLaMAModel;
-    }*/
+    // If no model with matching name found return undefined
+    return undefined;
   }
 
 }

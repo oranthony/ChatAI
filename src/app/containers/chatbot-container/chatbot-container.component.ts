@@ -1,13 +1,11 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { Observable, tap } from 'rxjs';
-import { AiModelCommunicatorCreator, ConcreteBlenderbotCommunicatorCreator, ConcreteDialogptCommunicatorCreator, ConcreteFalconCommunicatorCreator, ConcreteLlamaCommunicatorCreator } from 'src/app/common/factories/aimodel-communicator-factory';
+import { AiModelCommunicatorCreator, ConcreteBlenderbot3BCommunicatorCreator, ConcreteBlenderbotCommunicatorCreator, ConcreteDialogptCommunicatorCreator, ConcreteFalconCommunicatorCreator, ConcreteLlamaCommunicatorCreator } from 'src/app/common/factories/aimodel-communicator-factory';
 import { ErrorMessageState, LoadingMessageState, MessageState, SuccessMessageState } from 'src/app/common/models/message-state';
 import { TextMessage } from 'src/app/common/models/text-message';
 import { TextMessageService } from 'src/app/common/services/text-message.service';
 import { environment } from 'src/environments/environment';
-import { modelsName } from 'src/environments/environment.development';
-
-const exampleTextMessage: TextMessage[] = [{ isAnswer: false, text: "dfsdfgdfgdfg" }, { isAnswer: true, text: "hgnjjhghjkhjkjhkg" }, { isAnswer: false, text: "dfsdfgdfgdfg" }, { isAnswer: true, text: "hgnjjhghjkhjkjhkg" }, { isAnswer: false, text: "dfsdfgdfgdfg" }, { isAnswer: true, text: "hgnjjhghjkhjkjhkg" }, { isAnswer: false, text: "dfsdfgdfgdfg" }, { isAnswer: true, text: "hgnjjhghjkhjkjhkg" }, { isAnswer: false, text: "dfsdfgdfgdfg" }, { isAnswer: true, text: "hgnjjhghjkhjkjhkg" }]
+import { conversationalModelsName } from 'src/environments/environment.development';
 
 @Component({
   selector: 'app-chatbot-container',
@@ -32,20 +30,26 @@ export class ChatbotContainerComponent {
   // Name of the selected model used to generate answers
   selectedModel: string = ""
 
-  aiModelCommunicatorCreator!: AiModelCommunicatorCreator;
+  private aiModelCommunicatorCreator!: AiModelCommunicatorCreator;
+  private readonly blenderbotCommunicator = new ConcreteBlenderbotCommunicatorCreator();
+  private readonly blenderbot3BCommunicator = new ConcreteBlenderbot3BCommunicatorCreator();
+  private readonly dialogptCommunicator = new ConcreteDialogptCommunicatorCreator();
 
   constructor(private textMessageService: TextMessageService) {
     // Initialize message status with success value
     this.messageState = ChatbotContainerComponent.successMessageState;
 
-    // Fill modelList with the names stored in environment variable
-    Object.entries(modelsName).forEach(([key, value]) => {
+    // Fill modelList with the names of the models stored in environment variable
+    Object.entries(conversationalModelsName).forEach(([key, value]) => {
       this.modelList?.push(value);
     });
 
     // Set a model as default (no logic in this case, just the first model available)
     if (this.modelList) {
+      // Set the first model as default
       this.selectedModel = this.modelList[0];
+      // Set the corresponding communicator
+      this.setModelCommunicator();
     }
   }
 
@@ -54,46 +58,20 @@ export class ChatbotContainerComponent {
     // Set loading state
     this.messageState = ChatbotContainerComponent.loadingMessageState;
 
-    // Create user message
-    let userMessage: TextMessage = {
-      isAnswer: false,
-      text: message
-    };
+    // Create TextMessage Object with user message
+    let userMessage = this.createUserMessage(message);
 
     // Add user message to the list of messages
-    this.messageList.push(userMessage);
-    this.messageList = [...this.messageList];
+    this.addMessageToList(userMessage);
 
-
-    // Select right concrete builder
-
-    switch (this.selectedModel) {
-      case (modelsName.BLENDER_BOT): {
-        let blenderbotCommunicator = new ConcreteBlenderbotCommunicatorCreator();
-        this.aiModelCommunicatorCreator = blenderbotCommunicator;
-        break;
-      }
-      case (modelsName.BLENDER_BOT_3B): {
-        let blenderbotCommunicator = new ConcreteBlenderbotCommunicatorCreator();
-        this.aiModelCommunicatorCreator = blenderbotCommunicator;
-        break;
-      }
-      case modelsName.DIALOGPT: {
-        let dialogptCommunicator = new ConcreteDialogptCommunicatorCreator();
-        this.aiModelCommunicatorCreator = dialogptCommunicator;
-        break;
-      }
-    }
-
+    // Set the API URL for the model
     this.textMessageService.setReourceUrl(this.aiModelCommunicatorCreator.getAPIUrl());
 
     // Call API to get an answer
-    //TODO: call concrete builder instead
     this.textMessageService.post(this.aiModelCommunicatorCreator.parseArguments(message)).subscribe(
       res => {
         // Add API answer to the list of messages
-        this.messageList.push(res);
-        this.messageList = [...this.messageList];
+        this.addMessageToList(res);
         this.messageState = ChatbotContainerComponent.successMessageState;
       },
       err => {
@@ -103,9 +81,45 @@ export class ChatbotContainerComponent {
     );
   }
 
-  // When user selects a model
+  // When user selects a model the selected model is updated and the conresponding concrete builder is asign as global variable
   onChoosenModel(model: string) {
+    // Update the model name
     this.selectedModel = model;
+    // Update the communicator
+    this.setModelCommunicator();
+  }
+
+  // Selects right concrete builder according to the selected model
+  setModelCommunicator() {
+    switch (this.selectedModel) {
+      case (conversationalModelsName.BLENDER_BOT): {
+        this.aiModelCommunicatorCreator = this.blenderbotCommunicator;
+        break;
+      }
+      case (conversationalModelsName.BLENDER_BOT_3B): {
+        this.aiModelCommunicatorCreator = this.blenderbot3BCommunicator;
+        break;
+      }
+      case conversationalModelsName.DIALOGPT: {
+        this.aiModelCommunicatorCreator = this.dialogptCommunicator;
+        break;
+      }
+    }
+  }
+
+  // Creates user message object
+  createUserMessage(message: string): TextMessage {
+    return {
+      type: "text",
+      isAnswer: false,
+      text: message
+    };
+  }
+
+  // Adds a given message to the list of message displayed in the template
+  addMessageToList(message: TextMessage) {
+    this.messageList.push(message);
+    this.messageList = [...this.messageList];
   }
 
 }

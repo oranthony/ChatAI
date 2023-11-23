@@ -2,6 +2,8 @@ import { Component, ElementRef, EventEmitter, Input, OnInit, Output, SimpleChang
 import { TextMessage } from 'src/app/common/models/text-message';
 import { ChangeDetectorRef } from '@angular/core';
 import { MessageState, SuccessMessageState } from 'src/app/common/models/message-state';
+import { PictureMessage } from 'src/app/common/models/picture-message';
+import { SafeUrl } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-message-list',
@@ -12,35 +14,36 @@ export class MessageListComponent {
 
   @Input()
   messageState!: MessageState;
-  @Input() messageList: TextMessage[] = [];
-  @ViewChild('messageListTarget', { read: ElementRef, static:false })
-  private myScrollContainer!: ElementRef;
+  @Input() messageList: (TextMessage | PictureMessage)[] = [];
+  @ViewChild('messageListTarget', { read: ElementRef }) private myScrollContainer!: ElementRef;
 
   hasNewMessageArrived: boolean = false;
+  isPictureFullScreen: boolean = false;
+  fullScreenPictureUrl!: SafeUrl;
 
   AIProfileIcon: string;
   UserIcon: string;
 
   ngOnChanges(changes: SimpleChanges) {
     // Detect new message has arrived to trigger auto-scroll
-    if(changes["messageList"].currentValue != changes["messageList"].previousValue) {
+    if (changes["messageList"].currentValue != changes["messageList"].previousValue) {
       console.log("value changed");
       this.hasNewMessageArrived = true;
     }
   }
 
-  ngAfterViewChecked(){
+  ngAfterViewChecked() {
     // Scroll to bottom when new message has arrived
     if (this.hasNewMessageArrived) {
       this.hasNewMessageArrived = false;
       this.scrollToBottom();
-    }    
+    }
   }
 
-  constructor(private cdRef:ChangeDetectorRef) {
+  constructor(private cdRef: ChangeDetectorRef) {
     this.AIProfileIcon = '/assets/logo-short-bw-2.png';
     this.UserIcon = '/assets/user-picture.jpg';
-    let success: SuccessMessageState = {state: "Success"};
+    let success: SuccessMessageState = { state: "Success" };
     this.messageState = success;
   }
 
@@ -51,6 +54,24 @@ export class MessageListComponent {
       left: 0,
       behavior: 'smooth'
     });
-    
+  }
+
+  // Display the picture in full screen
+  showPictureFullPage(pictureUrl: SafeUrl) {
+    this.fullScreenPictureUrl = pictureUrl;
+    this.isPictureFullScreen = true;
+  }
+
+  closeFullScreenPicture() {
+    console.log("close");
+    this.isPictureFullScreen = false;
+  }
+
+  castMessageAsPictureMessage(message: any): PictureMessage {
+    return message;
+  }
+
+  castMessageAsTextMessage(message: any): TextMessage {
+    return message;
   }
 }

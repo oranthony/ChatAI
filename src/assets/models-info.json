@@ -35,6 +35,35 @@
         
       ],
       "link": "https://huggingface.co/microsoft/DialoGPT-large"
+    },
+    {
+      "name" : "openjourney",
+      "author": "PromptHero",
+      "dataSize": "123M",
+      "description": [
+         "Openjourney is a custom text-to-image model that generates AI art images in the style of Midjourney. It's a fine-tune of Stable Diffusion.",
+         "Openjourney is the second most downloaded text-to-image model on HuggingFace, only after Stable Diffusion itself. It's been downloaded millions of times, and it's also one of the top models on Replicate, with several million runs."
+      ],
+      "link": "https://huggingface.co/prompthero/openjourney"
+    },
+    {
+      "name" : "Stable Diffusion XL",
+      "author": "Stability AI",
+      "dataSize": "6.6B",
+      "description": [
+         "SDXL consists of an ensemble of experts pipeline for latent diffusion: In a first step, the base model is used to generate (noisy) latents, which are then further processed with a refinement model specialized for the final denoising steps."
+      ],
+      "link": "https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0"
+    },
+    {
+      "name" : "Stable Diffusion 1.5",
+      "author": "Robin Rombach, Patrick Esser",
+      "dataSize": "1B",
+      "description": [
+         "Stable Diffusion is a latent text-to-image diffusion model capable of generating photo-realistic images given any text input. ",
+         "The Stable-Diffusion-v1-5 checkpoint was initialized with the weights of the Stable-Diffusion-v1-2 checkpoint and subsequently fine-tuned on 595k steps at resolution 512x512 on laion-aesthetics v2 5+ and 10% dropping of the text-conditioning to improve classifier-free guidance sampling."
+      ],
+      "link": "https://huggingface.co/runwayml/stable-diffusion-v1-5"
     }
   ]
 }

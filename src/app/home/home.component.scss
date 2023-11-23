@@ -8,20 +8,24 @@ button {
   container-type: inline-size;
   container-name: homeComponentContainer;
   height: 100%;
+  display: grid;
+  grid-template-rows: 1fr 2fr 1fr;
 }
 
-.container {
-  height: 100%;
+.item-small {
+  min-height: 10px;
+  display: flex;
+  justify-content: center;
+}
+
+.hero-shot-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-}
-
-.hero-shot-container {
-  max-width: 75%;
+  padding-left: 10%;
+  padding-right: 10%;
   text-align: center;
-  margin-bottom: 45px;
 }
 
 .hero-shot {
@@ -35,8 +39,7 @@ button {
 .call-to-action {
   display: flex;
   flex-direction: column;
-  position: absolute;
-  bottom: 6svh;
+  margin-bottom: 25px;
 }
 
 .cta-button {
@@ -66,11 +69,6 @@ button {
     width: 450px;
   }
 
-  .hero-shot-container {
-    max-width: 65%;
-    text-align: center;
-  }
-
   .description {
     font-size: 1.2rem;
   }
@@ -90,11 +88,6 @@ button {
     width: 450px;
   }
 
-  .hero-shot-container {
-    max-width: 65%;
-    text-align: center;
-  }
-
   .description {
     font-size: 1.2rem;
   }
@@ -106,8 +99,6 @@ button {
 
   .call-to-action { 
     flex-direction: row;
-    position: relative;
-    bottom: 0;
   }
 }
 
@@ -122,8 +113,6 @@ button {
 
   .call-to-action { 
     flex-direction: row;
-    position: relative;
-    bottom: 0;
   }
 
   .cta-button {
@@ -131,3 +120,4 @@ button {
     width: 290px;
   }
 }
+

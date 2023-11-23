@@ -1,5 +1,6 @@
 <div class="grid"> 
-<div class="container">
+<!--<div class="container">-->
+  <div class="item item-small"></div>
 
   <div class="hero-shot-container">
     <img class="hero-shot" [src]="ImagePath">
@@ -8,9 +9,13 @@
     </div>
   </div>
 
-  <div class="call-to-action">
-    <button mat-button [routerLink]="['/chatbot']" class="cta-button" color="primary">Chat with Facebook bot</button>
-    <button mat-button [routerLink]="['/picture-gen']" class="cta-button">Generate pitures with AI</button>
+
+
+  <div class="item item-small">
+    <div class="call-to-action">
+      <button mat-button [routerLink]="['/chatbot']" class="cta-button" color="primary">Chat with Facebook bot</button>
+      <button mat-button [routerLink]="['/picture-gen']" class="cta-button">Generate pitures with AI</button>
+    </div>
   </div>
-</div>
+<!--</div>-->
 </div>

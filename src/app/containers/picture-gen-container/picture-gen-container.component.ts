@@ -13,7 +13,7 @@ import { textToImageModelsName } from 'src/environments/environment';
   styleUrls: ['./picture-gen-container.component.scss']
 })
 export class PictureGenContainerComponent {
-  title: string = "Image Builder with AI"
+  title: string = "Image Generator"
 
   // List of messages send by user (TextMessage) and AI pictures answers (PictureMessage)
   messageList: (TextMessage | PictureMessage)[] = [];

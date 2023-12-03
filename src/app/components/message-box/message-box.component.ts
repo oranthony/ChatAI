@@ -1,5 +1,6 @@
 import { CdkTextareaAutosize } from '@angular/cdk/text-field';
 import { Component, ElementRef, EventEmitter, Input, NgZone, OnInit, Output, ViewChild } from '@angular/core';
+import { Observable } from 'rxjs';
 import {take} from 'rxjs/operators';
 import { MessageState } from 'src/app/common/models/message-state';
 
@@ -9,7 +10,7 @@ import { MessageState } from 'src/app/common/models/message-state';
   styleUrls: ['./message-box.component.scss']
 })
 export class MessageBoxComponent {
-  @Input() messageState!: MessageState;
+  @Input() messageState!: Observable<MessageState>;
   @Output() sendMessage = new EventEmitter();
 
   @ViewChild('autosize')
@@ -25,6 +26,7 @@ export class MessageBoxComponent {
     this.ImagePath = '/assets/send.png';
   }
 
+  // Expand textarea when text takes multiples lines
   triggerResize() {
     // Wait for changes to be applied, then trigger textarea resize.
     this._ngZone.onStable.pipe(take(1)).subscribe(() => this.autosize.resizeToFitContent(true));

@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, isDevMode  } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -26,7 +26,14 @@ import { LoadingMessageComponent } from './components/loading-message/loading-me
 import { ErrorMessageComponent } from './components/error-message/error-message.component';
 import { AiModelDetailComponent } from './components/ai-model-detail/ai-model-detail.component';
 
-
+import { StoreModule, provideStore } from '@ngrx/store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from '../environments/environment'; // Angular CLI environment
+import { chatbotFeatureKey, chatbotFeature } from './state/chatbot/chatbot.reducer';
+import { pictureGenFeature, pictureGenFeatureKey } from './state/picture-gen/picture-gen-reducer';
+import { EffectsModule } from '@ngrx/effects';
+import { ChatbotEffects } from './state/chatbot/chatbot.effects';
+import { PictureGenEffects } from './state/picture-gen/picture-gen.effects';
 
 @NgModule({
   declarations: [
@@ -43,6 +50,14 @@ import { AiModelDetailComponent } from './components/ai-model-detail/ai-model-de
     AiModelDetailComponent,
   ],
   imports: [
+    StoreModule.forRoot({}),
+    StoreModule.forFeature(chatbotFeatureKey, chatbotFeature.reducer),
+    StoreModule.forFeature(pictureGenFeatureKey, pictureGenFeature.reducer),
+    StoreDevtoolsModule.instrument({
+      maxAge: 25, // Retains last 25 states
+      logOnly: !isDevMode(), // Restrict extension to log-only mode
+    }),
+    EffectsModule.forRoot([ChatbotEffects, PictureGenEffects]),
     AppRoutingModule,
     BrowserModule,
     BrowserAnimationsModule,
@@ -54,7 +69,8 @@ import { AiModelDetailComponent } from './components/ai-model-detail/ai-model-de
     FormsModule,
     TextFieldModule,
     MatSelectModule,
-    MatMenuModule
+    MatMenuModule,
+    
   ],
   providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}],
   bootstrap: [AppComponent]

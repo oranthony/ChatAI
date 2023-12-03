@@ -17,37 +17,13 @@ export abstract class ResourceService<T> {
 
   abstract getResourceUrl(): string;
 
-  /*headers= new HttpHeaders()
-  .set('content-type', 'application/json')
-  .set('Access-Control-Allow-Origin', '*');
-
-  private generateOptions(content: string) {
-    return {
-      headers: this.headers,
-      method: "POST",
-      body: JSON.stringify(content),
-    };
-
-  }*/
-
-  /*
-  fromServerModel(json: any): T {
-    let textMessage: TextMessage = {
-      isAnswer: true,
-      text: json.generated_text
-    }
-    return textMessage;
-  }
-  */
-
   // Override this to cast the answer into the right type
   fromServerModel(json: any): T {
     return json;
   }
-
+  
   post(message: string): Observable<T> {
     let headers = this.getHeaders();
-
     return this.httpClient.post<T>(this.getResourceUrl(), message, { headers })
       .pipe(
         map((json) => this.fromServerModel(json)),
@@ -62,6 +38,6 @@ export abstract class ResourceService<T> {
   handleError(error: HttpErrorResponse) {
     //TODO: handle error depending on HuggingFace Inference API
     console.log(error);
-    return throwError('Something wrong happened');
+    return throwError(error.message);
   }
 }

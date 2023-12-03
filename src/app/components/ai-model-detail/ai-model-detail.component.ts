@@ -12,7 +12,7 @@ import { conversationalModelsName } from 'src/environments/environment.developme
 })
 export class AiModelDetailComponent implements OnInit {
 
-  @Input() selectedModelName!: string;
+  @Input() selectedModelName!: Observable<string>;
   modelList!: Models;
   selectedModel!: Model;
   blenderBotModel!: Model;
@@ -28,12 +28,12 @@ export class AiModelDetailComponent implements OnInit {
     this.modelDetailsService.getJSON().subscribe(data => {
       this.modelList = data;
       // Once all models are loaded we assign the right model
-      if (this.selectedModelName) {
-        let selectedModel = this.getModelByName(this.selectedModelName);
+      this.selectedModelName.subscribe((selectedModelName) => {
+        let selectedModel = this.getModelByName(selectedModelName);
         if (selectedModel) {
           this.selectedModel = selectedModel;
         }
-      }
+      })
     })
   }
 
@@ -55,6 +55,7 @@ export class AiModelDetailComponent implements OnInit {
     }
   }
 
+  // Returns the corresponding Model based on the given name
   getModelByName(modelName: string): Model | undefined {
     for (let model of this.modelList.models) {
       if (model.name == modelName) {

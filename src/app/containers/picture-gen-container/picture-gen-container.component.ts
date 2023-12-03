@@ -1,11 +1,16 @@
 import { Component } from '@angular/core';
-import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { AiModelCommunicatorCreator, ConcreteOpenjourneyCommunicatorCreator, ConcreteStableDiffusion1_5CommunicatorCreator, ConcreteStableDiffusionXLCommunicatorCreator } from 'src/app/common/factories/aimodel-communicator-factory';
 import { ErrorMessageState, LoadingMessageState, MessageState, SuccessMessageState } from 'src/app/common/models/message-state';
 import { PictureMessage } from 'src/app/common/models/picture-message';
 import { TextMessage } from 'src/app/common/models/text-message';
 import { PictureMessageService } from 'src/app/common/services/picture-message.service';
 import { textToImageModelsName } from 'src/environments/environment';
+import { Store, select } from '@ngrx/store';
+import { addUserQuestion, askAnswerAI, setAiModelName } from 'src/app/state/picture-gen/picture-gen.actions';
+import { Observable } from 'rxjs/internal/Observable';
+import { selectAiModelName, selectMessageState, selectMessageList } from 'src/app/state/picture-gen/picture-gen-reducer';
+
+
 
 @Component({
   selector: 'app-picture-gen-container',
@@ -16,45 +21,39 @@ export class PictureGenContainerComponent {
   title: string = "Image Generator"
 
   // List of messages send by user (TextMessage) and AI pictures answers (PictureMessage)
-  messageList: (TextMessage | PictureMessage)[] = [];
+  messageList$: Observable<(TextMessage | PictureMessage)[]>;
 
   // Contains request state (success, loading or failed)
-  messageState!: MessageState;
-  private static successMessageState: SuccessMessageState = { state: "Success" };
-  private static loadingMessageState: LoadingMessageState = { state: "Loading" };
+  messageState$: Observable<MessageState>;
 
   // Contains the names of the available models
   modelList: string[] = [];
+  
   // Name of the selected model used to generate answers
-  selectedModel: string = ""
+  selectedModelName$: Observable<string>;
 
+  // Instantiate all concrete items from factory
   private aiModelCommunicatorCreator!: AiModelCommunicatorCreator;
   private readonly openjourneyCommunicator = new ConcreteOpenjourneyCommunicatorCreator();
   private readonly stableDiffusion1_5Communicator = new ConcreteStableDiffusion1_5CommunicatorCreator();
   private readonly stableDiffusionXLCommunicator = new ConcreteStableDiffusionXLCommunicatorCreator();
 
-  constructor(private sanitizer: DomSanitizer, private pictureMessageService: PictureMessageService) {
-    // Initialize message status with success value
-    this.messageState = PictureGenContainerComponent.successMessageState;
+  constructor(private pictureMessageService: PictureMessageService, private store: Store) {
+    // Assign all observable
+    this.messageState$ = this.store.pipe(select(selectMessageState));
+    this.messageList$ = this.store.pipe(select(selectMessageList));
+    this.selectedModelName$ = this.store.pipe(select(selectAiModelName));
+    this.setModelCommunicator();
 
     // Fill modelList with the names of the models stored in environment variable
     Object.entries(textToImageModelsName).forEach(([key, value]) => {
       this.modelList?.push(value);
     });
 
-    // Set a model as default (no logic in this case, just the first model available)
-    if (this.modelList) {
-      // Set the first model as default
-      this.selectedModel = this.modelList[0];
-      // Set the corresponding communicator
-      this.setModelCommunicator();
-    }
   }
 
+  // When user sends a message
   onSendMessage(message: string) {
-    // Set loading state
-    this.messageState = PictureGenContainerComponent.loadingMessageState;
-
     // Create TextMessage Object with user message
     let userMessage = this.createUserMessage(message);
 
@@ -64,43 +63,36 @@ export class PictureGenContainerComponent {
     // Set the API URL for the model
     this.pictureMessageService.setReourceUrl(this.aiModelCommunicatorCreator.getAPIUrl());
 
-    // Call API to get an answer
-    this.pictureMessageService.post(this.aiModelCommunicatorCreator.parseArguments(message)).subscribe(
-      res => {
-        this.addMessageToList(res);
-        this.messageState = PictureGenContainerComponent.successMessageState;
-      },
-      err => {
-        let errorMessageState: ErrorMessageState = { state: "Error", error: { message: err } };
-        this.messageState = errorMessageState;
-      }
-    )
+    // Dispatch action to ask answer to AI via dedicated effect
+    this.store.dispatch(askAnswerAI({ message: message }));
   }
 
   // When user selects a model the selected model is updated and the conresponding concrete builder is asign as global variable
   onChoosenModel(model: string) {
-    // Update the model name
-    this.selectedModel = model;
+    // Update the selected model name
+    this.store.dispatch(setAiModelName({ aiModelName: model }));
     // Update the communicator
     this.setModelCommunicator();
   }
 
   // Selects right concrete builder according to the selected model
   setModelCommunicator() {
-    switch (this.selectedModel) {
-      case textToImageModelsName.OPENJOURNEY: {
-        this.aiModelCommunicatorCreator = this.openjourneyCommunicator;
-        break;
+    this.selectedModelName$.subscribe((selectedModelName) => {
+      switch (selectedModelName) {
+        case textToImageModelsName.OPENJOURNEY: {
+          this.aiModelCommunicatorCreator = this.openjourneyCommunicator;
+          break;
+        }
+        case textToImageModelsName.STABLE_DIFFUSION_1_5: {
+          this.aiModelCommunicatorCreator = this.stableDiffusion1_5Communicator;
+          break;
+        }
+        case textToImageModelsName.STABLE_DIFFUSION_XL: {
+          this.aiModelCommunicatorCreator = this.stableDiffusionXLCommunicator;
+          break;
+        }
       }
-      case textToImageModelsName.STABLE_DIFFUSION_1_5: {
-        this.aiModelCommunicatorCreator = this.stableDiffusion1_5Communicator;
-        break;
-      }
-      case textToImageModelsName.STABLE_DIFFUSION_XL: {
-        this.aiModelCommunicatorCreator = this.stableDiffusionXLCommunicator;
-        break;
-      }
-    }
+    })
   }
 
   // Creates user message object
@@ -112,10 +104,9 @@ export class PictureGenContainerComponent {
     };
   }
 
-  // Adds a given message to the list of message displayed in the template
-  addMessageToList(message: TextMessage | PictureMessage) {
-    this.messageList.push(message);
-    this.messageList = [...this.messageList];
+  // Adds user message to the list of message displayed in the template
+  addMessageToList(message: TextMessage) {
+    this.store.dispatch(addUserQuestion({textMessage: message}))
   }
 
 

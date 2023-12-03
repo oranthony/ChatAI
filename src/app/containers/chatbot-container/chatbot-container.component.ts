@@ -1,11 +1,17 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { Observable, tap } from 'rxjs';
+import { tap } from 'rxjs';
+import { Observable } from 'rxjs/internal/Observable';
 import { AiModelCommunicatorCreator, ConcreteBlenderbot3BCommunicatorCreator, ConcreteBlenderbotCommunicatorCreator, ConcreteDialogptCommunicatorCreator, ConcreteFalconCommunicatorCreator, ConcreteLlamaCommunicatorCreator } from 'src/app/common/factories/aimodel-communicator-factory';
 import { ErrorMessageState, LoadingMessageState, MessageState, SuccessMessageState } from 'src/app/common/models/message-state';
 import { TextMessage } from 'src/app/common/models/text-message';
 import { TextMessageService } from 'src/app/common/services/text-message.service';
 import { environment } from 'src/environments/environment';
 import { conversationalModelsName } from 'src/environments/environment.development';
+import { Store, select } from '@ngrx/store';
+
+import { addAnswerAI, addUserQuestion, askAnswerAI, setAiModelName } from 'src/app/state/chatbot/chatbot.actions';
+import { selectAiModelName, selectMessageList, selectMessageState } from 'src/app/state/chatbot/chatbot.reducer';
+import { PictureMessage } from 'src/app/common/models/picture-message';
 
 @Component({
   selector: 'app-chatbot-container',
@@ -13,98 +19,79 @@ import { conversationalModelsName } from 'src/environments/environment.developme
   styleUrls: ['./chatbot-container.component.scss']
 })
 export class ChatbotContainerComponent {
-  //message$!: Observable<TextMessage[]>;
-
   title: string = "Chatbot  AI";
 
   // Contains all messages, user questions and AI answers
-  messageList: TextMessage[] = [];
+  messageList$: Observable<(TextMessage | PictureMessage)[]>;
 
   // Contains request state (success, loading or failed)
-  messageState!: MessageState;
-  private static successMessageState: SuccessMessageState = { state: "Success" };
-  private static loadingMessageState: LoadingMessageState = { state: "Loading" };
+  messageState$: Observable<MessageState>;
 
   // Contains the names of the available models
   modelList: string[] = [];
   // Name of the selected model used to generate answers
-  selectedModel: string = ""
+  selectedModelName$: Observable<string>;
 
+  // Instantiate all concrete items from factory
   private aiModelCommunicatorCreator!: AiModelCommunicatorCreator;
   private readonly blenderbotCommunicator = new ConcreteBlenderbotCommunicatorCreator();
   private readonly blenderbot3BCommunicator = new ConcreteBlenderbot3BCommunicatorCreator();
   private readonly dialogptCommunicator = new ConcreteDialogptCommunicatorCreator();
 
-  constructor(private textMessageService: TextMessageService) {
-    // Initialize message status with success value
-    this.messageState = ChatbotContainerComponent.successMessageState;
+  constructor(private textMessageService: TextMessageService, private store: Store) {
+    // Assign all observable
+    this.messageState$ = this.store.pipe(select(selectMessageState));
+    this.messageList$ = this.store.pipe(select(selectMessageList));
+    this.selectedModelName$ = this.store.pipe(select(selectAiModelName));
+    this.setModelCommunicator();
 
     // Fill modelList with the names of the models stored in environment variable
     Object.entries(conversationalModelsName).forEach(([key, value]) => {
       this.modelList?.push(value);
     });
-
-    // Set a model as default (no logic in this case, just the first model available)
-    if (this.modelList) {
-      // Set the first model as default
-      this.selectedModel = this.modelList[0];
-      // Set the corresponding communicator
-      this.setModelCommunicator();
-    }
   }
 
   // When user sends a message
   onSendMessage(message: string) {
-    // Set loading state
-    this.messageState = ChatbotContainerComponent.loadingMessageState;
-
     // Create TextMessage Object with user message
     let userMessage = this.createUserMessage(message);
 
     // Add user message to the list of messages
-    this.addMessageToList(userMessage);
+    this.addUserMessageToList(userMessage);
 
     // Set the API URL for the model
     this.textMessageService.setReourceUrl(this.aiModelCommunicatorCreator.getAPIUrl());
 
-    // Call API to get an answer
-    this.textMessageService.post(this.aiModelCommunicatorCreator.parseArguments(message)).subscribe(
-      res => {
-        // Add API answer to the list of messages
-        this.addMessageToList(res);
-        this.messageState = ChatbotContainerComponent.successMessageState;
-      },
-      err => {
-        let errorMessageState: ErrorMessageState = { state: "Error", error: { message: err } };
-        this.messageState = errorMessageState;
-      }
-    );
+    // Dispatch action to ask answer to AI via dedicated effect
+    this.store.dispatch(askAnswerAI({ message: message }));
   }
 
-  // When user selects a model the selected model is updated and the conresponding concrete builder is asign as global variable
+  // When user selects a model, the selected model is updated and the conresponding concrete builder is asigned as global variable
   onChoosenModel(model: string) {
-    // Update the model name
-    this.selectedModel = model;
+    // Update the selected model name
+    this.store.dispatch(setAiModelName({ aiModelName: model }));
     // Update the communicator
     this.setModelCommunicator();
   }
 
   // Selects right concrete builder according to the selected model
   setModelCommunicator() {
-    switch (this.selectedModel) {
-      case (conversationalModelsName.BLENDER_BOT): {
-        this.aiModelCommunicatorCreator = this.blenderbotCommunicator;
-        break;
+    this.selectedModelName$.subscribe((selectedModelName) => {
+      switch (selectedModelName) {
+        case (conversationalModelsName.BLENDER_BOT): {
+          this.aiModelCommunicatorCreator = this.blenderbotCommunicator;
+          break;
+        }
+        case (conversationalModelsName.BLENDER_BOT_3B): {
+          this.aiModelCommunicatorCreator = this.blenderbot3BCommunicator;
+          break;
+        }
+        case conversationalModelsName.DIALOGPT: {
+          this.aiModelCommunicatorCreator = this.dialogptCommunicator;
+          break;
+        }
       }
-      case (conversationalModelsName.BLENDER_BOT_3B): {
-        this.aiModelCommunicatorCreator = this.blenderbot3BCommunicator;
-        break;
-      }
-      case conversationalModelsName.DIALOGPT: {
-        this.aiModelCommunicatorCreator = this.dialogptCommunicator;
-        break;
-      }
-    }
+    })
   }
 
   // Creates user message object
@@ -116,10 +103,8 @@ export class ChatbotContainerComponent {
     };
   }
 
-  // Adds a given message to the list of message displayed in the template
-  addMessageToList(message: TextMessage) {
-    this.messageList.push(message);
-    this.messageList = [...this.messageList];
+  // Adds a user message to the list of message displayed in the template
+  addUserMessageToList(message: TextMessage) {
+    this.store.dispatch(addUserQuestion({ textMessage: message }))
   }
-
 }

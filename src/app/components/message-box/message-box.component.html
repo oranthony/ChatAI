@@ -13,7 +13,7 @@
     placeholder="Start typing" name="user-question" 
     [(ngModel)]="question" 
     (keyup.enter)="onSendMessage()" (keydown.enter)="onKeydown($event)"
-    [disabled]="messageState.state == 'Loading'"> </textarea> 
+    [disabled]="(messageState | async)?.state  == 'Loading'"> </textarea> 
   <!--</mat-form-field>-->
 </form>
 

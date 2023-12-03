@@ -4,6 +4,7 @@ import { ChangeDetectorRef } from '@angular/core';
 import { MessageState, SuccessMessageState } from 'src/app/common/models/message-state';
 import { PictureMessage } from 'src/app/common/models/picture-message';
 import { SafeUrl } from '@angular/platform-browser';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-message-list',
@@ -13,8 +14,8 @@ import { SafeUrl } from '@angular/platform-browser';
 export class MessageListComponent {
 
   @Input()
-  messageState!: MessageState;
-  @Input() messageList: (TextMessage | PictureMessage)[] = [];
+  messageState!: Observable<MessageState>;
+  @Input() messageList!: Observable<(TextMessage | PictureMessage)[]>;
   @ViewChild('messageListTarget', { read: ElementRef }) private myScrollContainer!: ElementRef;
 
   hasNewMessageArrived: boolean = false;
@@ -44,7 +45,7 @@ export class MessageListComponent {
     this.AIProfileIcon = '/assets/logo-short-bw-2.png';
     this.UserIcon = '/assets/user-picture.jpg';
     let success: SuccessMessageState = { state: "Success" };
-    this.messageState = success;
+    //this.messageState = success;
   }
 
   // Scroll list to bottom of ViewChild

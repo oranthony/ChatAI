@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Observable } from 'rxjs';
 import { NavigationService } from 'src/app/common/services/navigation.service';
 
 @Component({
@@ -9,7 +10,7 @@ import { NavigationService } from 'src/app/common/services/navigation.service';
 export class TitleTopBarComponent {
   @Input() title: string = "";
   @Input() modelList!: string[];
-  @Input() selectedModel!: string;
+  @Input() selectedModel!: Observable<string>;
 
   // Output selected model
   @Output() choosenModel = new EventEmitter();

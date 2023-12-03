@@ -12,7 +12,7 @@
     
     <mat-menu #menu="matMenu">
       <button mat-menu-item *ngFor="let model of modelList" (click)="onSelectedModel(model)">
-        <mat-icon [ngClass]="{'hide-icon' : model != selectedModel}">check</mat-icon>
+        <mat-icon [ngClass]="{'hide-icon' : model != (selectedModel | async) }">check</mat-icon>
         <span>{{model}}</span>
       </button>
     </mat-menu>

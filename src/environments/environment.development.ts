@@ -25,10 +25,3 @@ export const textToImageModelsName = {
   STABLE_DIFFUSION_XL: "Stable Diffusion XL",
   STABLE_DIFFUSION_1_5: "Stable Diffusion 1.5"
 }
-
-/*
-export const modelsName = [
-  { key: "BLENDER_BOT", name: "BlenderBot" },
-  { key: "LLAMA", name: "LLaMA" }
-]
-*/

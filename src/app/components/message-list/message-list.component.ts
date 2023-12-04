@@ -4,7 +4,7 @@ import { ChangeDetectorRef } from '@angular/core';
 import { MessageState, SuccessMessageState } from 'src/app/common/models/message-state';
 import { PictureMessage } from 'src/app/common/models/picture-message';
 import { SafeUrl } from '@angular/platform-browser';
-import { Observable } from 'rxjs';
+import { Observable, distinctUntilChanged } from 'rxjs';
 
 @Component({
   selector: 'app-message-list',
@@ -15,7 +15,7 @@ export class MessageListComponent {
 
   @Input()
   messageState!: Observable<MessageState>;
-  @Input() messageList!: Observable<(TextMessage | PictureMessage)[]>;
+  @Input() messageList!: (TextMessage | PictureMessage)[];
   @ViewChild('messageListTarget', { read: ElementRef }) private myScrollContainer!: ElementRef;
 
   hasNewMessageArrived: boolean = false;
@@ -26,6 +26,7 @@ export class MessageListComponent {
   UserIcon: string;
 
   ngOnChanges(changes: SimpleChanges) {
+    console.log(changes);
     // Detect new message has arrived to trigger auto-scroll
     if (changes["messageList"].currentValue != changes["messageList"].previousValue) {
       console.log("value changed");
@@ -44,8 +45,6 @@ export class MessageListComponent {
   constructor(private cdRef: ChangeDetectorRef) {
     this.AIProfileIcon = '/assets/logo-short-bw-2.png';
     this.UserIcon = '/assets/user-picture.jpg';
-    let success: SuccessMessageState = { state: "Success" };
-    //this.messageState = success;
   }
 
   // Scroll list to bottom of ViewChild

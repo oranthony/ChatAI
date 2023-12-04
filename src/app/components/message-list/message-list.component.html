@@ -1,6 +1,6 @@
 <div #messageListTarget id="message-list-container">
   <div *ngIf="messageList">
-    <div class="container" *ngFor="let message of (messageList |async)">
+    <div class="container" *ngFor="let message of messageList">
       <!-- If it's an answer we display it on the left -->
       <div *ngIf="message.isAnswer else elseBlockUserMessage">
         <!-- If it's a text message we display a text in a bubble -->

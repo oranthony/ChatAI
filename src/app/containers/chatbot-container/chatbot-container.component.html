@@ -2,7 +2,7 @@
   <div class="chatbot-content">
     <app-title-top-bar [title]="title" [modelList]="modelList" [selectedModel]="selectedModelName$"
       (choosenModel)="onChoosenModel($event)"></app-title-top-bar>
-    <app-message-list #messageListTarget class="message-list" [messageList]="messageList$"
+    <app-message-list #messageListTarget class="message-list" [messageList]="(messageList$ |async)!"
       [messageState]="messageState$"></app-message-list>
 
     <app-message-box class="message-box" [messageState]="messageState$"

@@ -129,6 +129,12 @@
   cursor: pointer;
 }
 
+app-message-suggestions {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+
 @container messageListContainer (min-width: 535px) {
   .container {
     padding-top: 45px;

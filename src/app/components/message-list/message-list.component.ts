@@ -16,6 +16,9 @@ export class MessageListComponent {
   @Input()
   messageState!: Observable<MessageState>;
   @Input() messageList!: (TextMessage | PictureMessage)[];
+  @Input() messageSuggestionsList: string[] = [];
+  @Input() suggestionOrigin!: string;
+  @Output() suggestionClicked = new EventEmitter();
   @ViewChild('messageListTarget', { read: ElementRef }) private myScrollContainer!: ElementRef;
 
   hasNewMessageArrived: boolean = false;

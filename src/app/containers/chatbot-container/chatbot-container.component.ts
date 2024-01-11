@@ -1,17 +1,18 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, HostListener, ViewChild } from '@angular/core';
 import { tap } from 'rxjs';
 import { Observable } from 'rxjs/internal/Observable';
 import { AiModelCommunicatorCreator, ConcreteBlenderbot3BCommunicatorCreator, ConcreteBlenderbotCommunicatorCreator, ConcreteDialogptCommunicatorCreator, ConcreteFalconCommunicatorCreator, ConcreteLlamaCommunicatorCreator } from 'src/app/common/factories/aimodel-communicator-factory';
 import { ErrorMessageState, LoadingMessageState, MessageState, SuccessMessageState } from 'src/app/common/models/message-state';
 import { TextMessage } from 'src/app/common/models/text-message';
 import { TextMessageService } from 'src/app/common/services/text-message.service';
-import { environment } from 'src/environments/environment';
+import { containersName, environment, textMessageSugestions } from 'src/environments/environment';
 import { conversationalModelsName } from 'src/environments/environment.development';
 import { Store, select } from '@ngrx/store';
 
 import { addAnswerAI, addUserQuestion, askAnswerAI, setAiModelName } from 'src/app/state/chatbot/chatbot.actions';
 import { selectAiModelName, selectMessageList, selectMessageState } from 'src/app/state/chatbot/chatbot.reducer';
 import { PictureMessage } from 'src/app/common/models/picture-message';
+import { SuggestionsService } from 'src/app/common/services/suggestions.service';
 
 @Component({
   selector: 'app-chatbot-container',
@@ -19,7 +20,10 @@ import { PictureMessage } from 'src/app/common/models/picture-message';
   styleUrls: ['./chatbot-container.component.scss']
 })
 export class ChatbotContainerComponent {
+  // Title displayed in the top bar
   title: string = "Chatbot  AI";
+  // Name of this container passed down to message-suggestion component. Used to treack down the source of the suggestions.
+  containerName = containersName.CHATBOT;
 
   // Contains all messages, user questions and AI answers
   messageList$: Observable<(TextMessage | PictureMessage)[]>;
@@ -38,7 +42,10 @@ export class ChatbotContainerComponent {
   private readonly blenderbot3BCommunicator = new ConcreteBlenderbot3BCommunicatorCreator();
   private readonly dialogptCommunicator = new ConcreteDialogptCommunicatorCreator();
 
-  constructor(private textMessageService: TextMessageService, private store: Store) {
+  // Holds the suggestions of messages displayed in message-list component
+  messageSuggestionsList: string[];
+
+  constructor(private textMessageService: TextMessageService, private suggestionService: SuggestionsService, private store: Store) {
     // Assign all observable
     this.messageState$ = this.store.pipe(select(selectMessageState));
     this.messageList$ = this.store.pipe(select(selectMessageList));
@@ -49,6 +56,17 @@ export class ChatbotContainerComponent {
     Object.entries(conversationalModelsName).forEach(([key, value]) => {
       this.modelList?.push(value);
     });
+
+    // Fill array of suggestions of messages based on data retreived from local JSON
+    this.messageSuggestionsList = textMessageSugestions;
+
+    // React when user click on suggested message
+    this.suggestionService.notificationForChatbotContainerReceived.subscribe(
+      suggestion => {
+        // When click on suggested message, the corresponding message is send
+        this.onSendMessage(suggestion);
+      }
+    )
   }
 
   // When user sends a message

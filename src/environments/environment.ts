@@ -25,3 +25,12 @@ export const textToImageModelsName = {
   STABLE_DIFFUSION_XL: "Stable Diffusion XL",
   STABLE_DIFFUSION_1_5: "Stable Diffusion 1.5"
 }
+
+export const containersName = {
+  CHATBOT: "chatbot",
+  PICTUREGEN: "picturegen"
+}
+
+export const textMessageSugestions = ["How are you?", "Do you like movies?", "Tell me a short story", "What's your favorite color?"]
+
+export const pictureMessageSugestions = ["A cat in a space suit", "Captain America poster style", "A monkey playing the piano"]

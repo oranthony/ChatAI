@@ -4,11 +4,12 @@ import { ErrorMessageState, LoadingMessageState, MessageState, SuccessMessageSta
 import { PictureMessage } from 'src/app/common/models/picture-message';
 import { TextMessage } from 'src/app/common/models/text-message';
 import { PictureMessageService } from 'src/app/common/services/picture-message.service';
-import { textToImageModelsName } from 'src/environments/environment';
+import { containersName, pictureMessageSugestions, textToImageModelsName } from 'src/environments/environment';
 import { Store, select } from '@ngrx/store';
 import { addUserQuestion, askAnswerAI, setAiModelName } from 'src/app/state/picture-gen/picture-gen.actions';
 import { Observable } from 'rxjs/internal/Observable';
 import { selectAiModelName, selectMessageState, selectMessageList } from 'src/app/state/picture-gen/picture-gen-reducer';
+import { SuggestionsService } from 'src/app/common/services/suggestions.service';
 
 
 
@@ -18,7 +19,10 @@ import { selectAiModelName, selectMessageState, selectMessageList } from 'src/ap
   styleUrls: ['./picture-gen-container.component.scss']
 })
 export class PictureGenContainerComponent {
-  title: string = "Image Generator"
+  // Title displayed in the top bar
+  title: string = "Image Generator";
+  // Name of this container passed down to message-suggestion component. Used to treack down the source of the suggestions.
+  containerName = containersName.PICTUREGEN;
 
   // List of messages send by user (TextMessage) and AI pictures answers (PictureMessage)
   messageList$: Observable<(TextMessage | PictureMessage)[]>;
@@ -38,7 +42,10 @@ export class PictureGenContainerComponent {
   private readonly stableDiffusion1_5Communicator = new ConcreteStableDiffusion1_5CommunicatorCreator();
   private readonly stableDiffusionXLCommunicator = new ConcreteStableDiffusionXLCommunicatorCreator();
 
-  constructor(private pictureMessageService: PictureMessageService, private store: Store) {
+  // Holds the suggestions of messages displayed in message-list component
+  messageSuggestionsList: string[];
+
+  constructor(private pictureMessageService: PictureMessageService, private suggestionService: SuggestionsService, private store: Store) {
     // Assign all observable
     this.messageState$ = this.store.pipe(select(selectMessageState));
     this.messageList$ = this.store.pipe(select(selectMessageList));
@@ -50,6 +57,16 @@ export class PictureGenContainerComponent {
       this.modelList?.push(value);
     });
 
+    // Fill array of suggestions of messages based on data retreived from local JSON
+    this.messageSuggestionsList = pictureMessageSugestions;
+
+    // React when user click on suggested message
+    this.suggestionService.notificationForPictureContainerReceived.subscribe(
+      suggestion => {
+        // When click on suggested message, the corresponding message is send
+        this.onSendMessage(suggestion);
+      }
+    )
   }
 
   // When user sends a message

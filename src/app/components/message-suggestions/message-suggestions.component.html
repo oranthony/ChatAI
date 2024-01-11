@@ -1,0 +1,7 @@
+<div class="container" *ngIf="isSuggestionsShowed">
+  <div class="suggestion-list">
+    <div *ngFor="let suggestion of messageSuggestionsList">
+      <div class="suggestion" (click)="onSuggestionClick(suggestion)">{{suggestion}}</div>
+    </div>
+  </div>
+</div>

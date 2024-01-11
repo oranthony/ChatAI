@@ -1,0 +1,27 @@
+.container {
+  container-type: inline-size;
+  container-name: suggestion-list;
+}
+
+.suggestion-list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.suggestion {
+  border: 1px solid #eeeef2;
+  background-color: #f8fafb;
+  border-radius: 12px;
+  padding: 10px;
+  margin-right: 15px;
+  margin-top: 7px;
+  color: rgb(109, 109, 109);
+  cursor: pointer;
+}
+
+@container suggestion-list (max-width: 800px) {
+  .suggestion-list {
+    justify-content: center;
+  }
+}

@@ -34,6 +34,7 @@ import { pictureGenFeature, pictureGenFeatureKey } from './state/picture-gen/pic
 import { EffectsModule } from '@ngrx/effects';
 import { ChatbotEffects } from './state/chatbot/chatbot.effects';
 import { PictureGenEffects } from './state/picture-gen/picture-gen.effects';
+import { MessageSuggestionsComponent } from './components/message-suggestions/message-suggestions.component';
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import { PictureGenEffects } from './state/picture-gen/picture-gen.effects';
     LoadingMessageComponent,
     ErrorMessageComponent,
     AiModelDetailComponent,
+    MessageSuggestionsComponent
   ],
   imports: [
     StoreModule.forRoot({}),

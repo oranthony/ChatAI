@@ -1,4 +1,4 @@
-# ChatAI with Angular, Component Driven Architecture, Container & Presentational Components, RxJS, (NgRx soon)
+# ChatAI with Angular, Component Driven Architecture, Container & Presentational Components, RxJS, NgRx
 
 This is a chatbot using Facebook BlenderBot (400M) and soon LLaMA.
 

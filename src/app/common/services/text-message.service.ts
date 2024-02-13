@@ -37,7 +37,8 @@ export class TextMessageService extends ResourceService<TextMessage> {
     return {
       type: "text",
       isAnswer: true,
-      text: json.generated_text
+      // temp fix due to changes in API
+      text: json[0].generated_text
     };
   }
 

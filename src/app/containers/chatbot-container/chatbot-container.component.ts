@@ -13,6 +13,7 @@ import { addAnswerAI, addUserQuestion, askAnswerAI, setAiModelName } from 'src/a
 import { selectAiModelName, selectMessageList, selectMessageState } from 'src/app/state/chatbot/chatbot.reducer';
 import { PictureMessage } from 'src/app/common/models/picture-message';
 import { SuggestionsService } from 'src/app/common/services/suggestions.service';
+import { mySignal } from 'src/app/components/message-suggestions/message-suggestions.component';
 
 @Component({
   selector: 'app-chatbot-container',
@@ -67,10 +68,17 @@ export class ChatbotContainerComponent {
         this.onSendMessage(suggestion);
       }
     )
+
+    //mySignal.subscribe((value) => {})
   }
 
   // When user sends a message
   onSendMessage(message: string) {
+    // Hides suggestions when a message is send (once a conversation is started)
+    if (this.messageSuggestionsList.length != 0) {
+      this.messageSuggestionsList = [];
+    }
+
     // Create TextMessage Object with user message
     let userMessage = this.createUserMessage(message);
 

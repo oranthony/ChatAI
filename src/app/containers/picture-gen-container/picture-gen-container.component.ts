@@ -71,6 +71,11 @@ export class PictureGenContainerComponent {
 
   // When user sends a message
   onSendMessage(message: string) {
+    // Hides suggestions when a message is send (once a conversation is started)
+    if (this.messageSuggestionsList.length != 0) {
+      this.messageSuggestionsList = [];
+    }
+
     // Create TextMessage Object with user message
     let userMessage = this.createUserMessage(message);
 

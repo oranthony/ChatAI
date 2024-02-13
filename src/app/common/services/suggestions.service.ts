@@ -31,6 +31,5 @@ export class SuggestionsService {
     if (target == containersName.PICTUREGEN) {
       this.notificationToPictureGenContainer.next(suggestion);
     }
-    console.log(suggestion);
   }
 }

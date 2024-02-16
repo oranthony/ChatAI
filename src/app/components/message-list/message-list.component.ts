@@ -15,10 +15,16 @@ export class MessageListComponent {
 
   @Input()
   messageState!: Observable<MessageState>;
+  // List of messages displayed
   @Input() messageList!: (TextMessage | PictureMessage)[];
+
+  // SUggestions related inputs
   @Input() messageSuggestionsList: string[] = [];
   @Input() suggestionOrigin!: string;
-  @Output() suggestionClicked = new EventEmitter();
+  @Input() isSuggestionsShowed!: boolean;
+  //@Output() suggestionClicked = new EventEmitter();
+
+  // Used to access the list height in DOM (required to scroll to bottom of conversation)
   @ViewChild('messageListTarget', { read: ElementRef }) private myScrollContainer!: ElementRef;
 
   hasNewMessageArrived: boolean = false;

@@ -6,6 +6,11 @@ import { containersName } from 'src/environments/environment';
  * Service used to allow message-suggestion component to send data to parent container (chatbot-container, picture-gen-container...).
  * I use a service here to allow communication between components that are deep down the component tree and parent container.
  * Using a service prevents nested Input and Output in multiple child components.
+ * 
+ * chatbot-container and picture-gen-container use Inputs() to communicate the list of suggested messages. This service is used to 
+ * trigger selection event up to the parent container.
+ * 
+ * This service is responsible for routing the selection event to the right container. 
  */
 
 @Injectable({

@@ -8,7 +8,7 @@ import { containersName, pictureMessageSugestions, textToImageModelsName } from 
 import { Store, select } from '@ngrx/store';
 import { addUserQuestion, askAnswerAI, setAiModelName } from 'src/app/state/picture-gen/picture-gen.actions';
 import { Observable } from 'rxjs/internal/Observable';
-import { selectAiModelName, selectMessageState, selectMessageList } from 'src/app/state/picture-gen/picture-gen-reducer';
+import { selectAiModelName, selectMessageState, selectMessageList, selectIsNewConversation } from 'src/app/state/picture-gen/picture-gen-reducer';
 import { SuggestionsService } from 'src/app/common/services/suggestions.service';
 
 
@@ -36,6 +36,9 @@ export class PictureGenContainerComponent {
   // Name of the selected model used to generate answers
   selectedModelName$: Observable<string>;
 
+  // If this is a new conversation show suggestions for conversation starter, otherwise hide suggestions (message-suggestions-component)
+  isSuggestionShowned$: Observable<boolean>;
+
   // Instantiate all concrete items from factory
   private aiModelCommunicatorCreator!: AiModelCommunicatorCreator;
   private readonly openjourneyCommunicator = new ConcreteOpenjourneyCommunicatorCreator();
@@ -50,6 +53,7 @@ export class PictureGenContainerComponent {
     this.messageState$ = this.store.pipe(select(selectMessageState));
     this.messageList$ = this.store.pipe(select(selectMessageList));
     this.selectedModelName$ = this.store.pipe(select(selectAiModelName));
+    this.isSuggestionShowned$ = this.store.pipe(select(selectIsNewConversation));
     this.setModelCommunicator();
 
     // Fill modelList with the names of the models stored in environment variable

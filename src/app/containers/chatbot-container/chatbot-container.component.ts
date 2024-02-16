@@ -10,7 +10,7 @@ import { conversationalModelsName } from 'src/environments/environment.developme
 import { Store, select } from '@ngrx/store';
 
 import { addAnswerAI, addUserQuestion, askAnswerAI, setAiModelName } from 'src/app/state/chatbot/chatbot.actions';
-import { selectAiModelName, selectMessageList, selectMessageState } from 'src/app/state/chatbot/chatbot.reducer';
+import { selectAiModelName, selectIsNewConversation, selectMessageList, selectMessageState } from 'src/app/state/chatbot/chatbot.reducer';
 import { PictureMessage } from 'src/app/common/models/picture-message';
 import { SuggestionsService } from 'src/app/common/services/suggestions.service';
 //import { mySignal } from 'src/app/components/message-suggestions/message-suggestions.component';
@@ -37,6 +37,9 @@ export class ChatbotContainerComponent {
   // Name of the selected model used to generate answers
   selectedModelName$: Observable<string>;
 
+  // If this is a new conversation show suggestions for conversation starter, otherwise hide suggestions (message-suggestions-component)
+  isSuggestionShowned$: Observable<boolean>;
+
   // Instantiate all concrete items from factory
   private aiModelCommunicatorCreator!: AiModelCommunicatorCreator;
   private readonly blenderbotCommunicator = new ConcreteBlenderbotCommunicatorCreator();
@@ -51,6 +54,7 @@ export class ChatbotContainerComponent {
     this.messageState$ = this.store.pipe(select(selectMessageState));
     this.messageList$ = this.store.pipe(select(selectMessageList));
     this.selectedModelName$ = this.store.pipe(select(selectAiModelName));
+    this.isSuggestionShowned$ = this.store.pipe(select(selectIsNewConversation));
     this.setModelCommunicator();
 
     // Fill modelList with the names of the models stored in environment variable
@@ -74,12 +78,6 @@ export class ChatbotContainerComponent {
 
   // When user sends a message
   onSendMessage(message: string) {
-    //TODO: finish implementing
-    // Hides suggestions when a message is send (once a conversation is started)
-    //if (this.messageSuggestionsList.length != 0) {
-      //this.messageSuggestionsList = [];
-    //}
-
     // Create TextMessage Object with user message
     let userMessage = this.createUserMessage(message);
 

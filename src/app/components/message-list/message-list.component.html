@@ -39,9 +39,7 @@
     </div>
   </div>
 
-  <!--
-  <app-message-suggestions [messageSuggestionsList]="messageSuggestionsList" [suggestionOrigin]="suggestionOrigin"></app-message-suggestions>
-  -->
+  <app-message-suggestions [messageSuggestionsList]="messageSuggestionsList" [suggestionOrigin]="suggestionOrigin" [isSuggestionsShowed]="isSuggestionsShowed"></app-message-suggestions>
 
   <div [ngSwitch]="(messageState | async)?.state">
     <div *ngSwitchCase="'Loading'">

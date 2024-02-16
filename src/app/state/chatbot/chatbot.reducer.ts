@@ -13,12 +13,15 @@ export interface State {
   aiModelName: string;
   messageState: MessageState;
   messageList: TextMessage[];
+  isNewConversation: boolean;
 }
 
 export const initialState: State = {
   aiModelName: conversationalModelsName.BLENDER_BOT,
   messageState: successMessageState,
   messageList: [],
+  // Used to know if suggestions should be displayed (they are dipslayed only for new conversations)
+  isNewConversation: true
 };
 
 export const chatbotFeature = createFeature({
@@ -28,7 +31,7 @@ export const chatbotFeature = createFeature({
     on(ChatbotActions.askAnswerAI, state => ({ ...state, messageState: loadingMessageState })),
     on(ChatbotActions.addAnswerAI, (state, { textMessage }) => ({ ...state, messageList: [...state.messageList, textMessage], messageState: successMessageState })),
     on(ChatbotActions.addAnswerAIError, (state, { errorMessageState }) => ({ ...state, messageState: errorMessageState })),
-    on(ChatbotActions.addUserQuestion, (state, { textMessage }) => ({ ...state, messageList: [...state.messageList, textMessage] })),
+    on(ChatbotActions.addUserQuestion, (state, { textMessage }) => ({ ...state, messageList: [...state.messageList, textMessage], isNewConversation: false })),
     on(ChatbotActions.setAiModelName, (state, { aiModelName }) => ({ ...state, aiModelName: aiModelName })),
   ),
 });
@@ -38,5 +41,6 @@ export const {
   reducer: chatbotReducer,
   selectMessageList,
   selectMessageState,
-  selectAiModelName
+  selectAiModelName,
+  selectIsNewConversation
 } = chatbotFeature;

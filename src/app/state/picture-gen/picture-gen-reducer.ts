@@ -14,12 +14,15 @@ export interface State {
   aiModelName: string;
   messageState: MessageState;
   messageList: (TextMessage | PictureMessage)[];
+  isNewConversation: boolean;
 }
 
 export const initialState: State = {
   aiModelName: textToImageModelsName.OPENJOURNEY,
   messageState: successMessageState,
   messageList: [],
+  // Used to know if suggestions should be displayed (they are dipslayed only for new conversations)
+  isNewConversation: true
 };
 
 export const pictureGenFeature = createFeature({
@@ -29,7 +32,7 @@ export const pictureGenFeature = createFeature({
     on(PictureGenActions.askAnswerAI, state => ({ ...state, messageState: loadingMessageState })),
     on(PictureGenActions.addAnswerAI, (state, { pictureMessage }) => ({ ...state, messageList: [...state.messageList, pictureMessage], messageState: successMessageState })),
     on(PictureGenActions.addAnswerAIError, (state, { errorMessageState }) => ({ ...state, messageState: errorMessageState })),
-    on(PictureGenActions.addUserQuestion, (state, { textMessage }) => ({ ...state, messageList: [...state.messageList, textMessage] })),
+    on(PictureGenActions.addUserQuestion, (state, { textMessage }) => ({ ...state, messageList: [...state.messageList, textMessage], isNewConversation: false })),
     on(PictureGenActions.setAiModelName, (state, { aiModelName }) => ({ ...state, aiModelName: aiModelName })),
   ),
 });
@@ -39,5 +42,6 @@ export const {
   reducer: pictureGenReducer,
   selectMessageList,
   selectMessageState,
-  selectAiModelName
+  selectAiModelName,
+  selectIsNewConversation
 } = pictureGenFeature;

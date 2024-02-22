@@ -34,6 +34,7 @@ export class SuggestionsService {
       this.notificationToChatbotContainer.next(suggestion);
     }
     if (target == containersName.PICTUREGEN) {
+      console.log("service send notif");
       this.notificationToPictureGenContainer.next(suggestion);
     }
   }

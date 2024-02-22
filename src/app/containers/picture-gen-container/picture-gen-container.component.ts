@@ -10,6 +10,7 @@ import { addUserQuestion, askAnswerAI, setAiModelName } from 'src/app/state/pict
 import { Observable } from 'rxjs/internal/Observable';
 import { selectAiModelName, selectMessageState, selectMessageList, selectIsNewConversation } from 'src/app/state/picture-gen/picture-gen-reducer';
 import { SuggestionsService } from 'src/app/common/services/suggestions.service';
+import { Subscription } from 'rxjs';
 
 
 
@@ -45,8 +46,11 @@ export class PictureGenContainerComponent {
   private readonly stableDiffusion1_5Communicator = new ConcreteStableDiffusion1_5CommunicatorCreator();
   private readonly stableDiffusionXLCommunicator = new ConcreteStableDiffusionXLCommunicatorCreator();
 
+  /** Handle Suggestions from presentanional component : message-suggestion-component */
   // Holds the suggestions of messages displayed in message-list component
   messageSuggestionsList: string[];
+  // Store the subscription from the service observable to be able to unsubscribe when the component get destroyed
+  subscription?: Subscription;
 
   constructor(private pictureMessageService: PictureMessageService, private suggestionService: SuggestionsService, private store: Store) {
     // Assign all observable
@@ -65,12 +69,18 @@ export class PictureGenContainerComponent {
     this.messageSuggestionsList = pictureMessageSugestions;
 
     // React when user click on suggested message
-    this.suggestionService.notificationForPictureContainerReceived.subscribe(
+    this.subscription = this.suggestionService.notificationForPictureContainerReceived.subscribe(
       suggestion => {
         // When click on suggested message, the corresponding message is send
         this.onSendMessage(suggestion);
       }
     )
+  }
+
+  ngOnDestroy(){
+    // Unsubscribe from observable otherwise it stays alive when the component is re-rendered and leads to multiple cast of 
+    // event (ie : multiple messages sent when the user clicks on the suggestion if the component has already been rendered at least once)
+    this.subscription?.unsubscribe();
   }
 
   // When user sends a message

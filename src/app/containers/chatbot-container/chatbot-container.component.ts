@@ -1,5 +1,5 @@
 import { Component, ElementRef, HostListener, ViewChild } from '@angular/core';
-import { tap } from 'rxjs';
+import { Subscription, tap } from 'rxjs';
 import { Observable } from 'rxjs/internal/Observable';
 import { AiModelCommunicatorCreator, ConcreteBlenderbot3BCommunicatorCreator, ConcreteBlenderbotCommunicatorCreator, ConcreteDialogptCommunicatorCreator, ConcreteFalconCommunicatorCreator, ConcreteLlamaCommunicatorCreator } from 'src/app/common/factories/aimodel-communicator-factory';
 import { ErrorMessageState, LoadingMessageState, MessageState, SuccessMessageState } from 'src/app/common/models/message-state';
@@ -46,8 +46,11 @@ export class ChatbotContainerComponent {
   private readonly blenderbot3BCommunicator = new ConcreteBlenderbot3BCommunicatorCreator();
   private readonly dialogptCommunicator = new ConcreteDialogptCommunicatorCreator();
 
+  /** Handle Suggestions from presentanional component : message-suggestion-component */
   // Holds the suggestions of messages displayed in message-list component
   messageSuggestionsList: string[];
+  // Store the subscription from the service observable to be able to unsubscribe when the component get destroyed
+  subscription?: Subscription;
 
   constructor(private textMessageService: TextMessageService, private suggestionService: SuggestionsService, private store: Store) {
     // Assign all observable
@@ -66,14 +69,18 @@ export class ChatbotContainerComponent {
     this.messageSuggestionsList = textMessageSugestions;
 
     // React when user click on suggested message
-    this.suggestionService.notificationForChatbotContainerReceived.subscribe(
+    this.subscription = this.suggestionService.notificationForChatbotContainerReceived.subscribe(
       suggestion => {
         // When click on suggested message, the corresponding message is send
         this.onSendMessage(suggestion);
       }
     )
+  }
 
-    //mySignal.subscribe((value) => {})
+  ngOnDestroy(){
+    // Unsubscribe from observable otherwise it stays alive when the component is re-rendered and leads to multiple cast of 
+    // event (ie : multiple messages sent when the user clicks on the suggestion if the component has already been rendered at least once)
+    this.subscription?.unsubscribe();
   }
 
   // When user sends a message

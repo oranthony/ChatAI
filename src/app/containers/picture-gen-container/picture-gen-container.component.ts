@@ -78,7 +78,7 @@ export class PictureGenContainerComponent {
   }
 
   ngOnDestroy(){
-    // Unsubscribe from observable otherwise it stays alive when the component is re-rendered and leads to multiple cast of 
+    // Unsubscribe from observable otherwise it stays alive when the component is re-rendered. This would lead to multiple cast of 
     // event (ie : multiple messages sent when the user clicks on the suggestion if the component has already been rendered at least once)
     this.subscription?.unsubscribe();
   }

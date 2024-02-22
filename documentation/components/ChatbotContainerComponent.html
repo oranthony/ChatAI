@@ -1,0 +1,1409 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>chat-ai documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avaoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+
+               if ($darkModeToggles.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-block d-sm-none">
+            <a href="../" class="navbar-brand">chat-ai documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  ChatbotContainerComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
+            <a href="#styleData" class="nav-link"
+                role="tab" id="styleData-tab" data-bs-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/containers/chatbot-container/chatbot-container.component.ts</code>
+</p>
+
+
+
+
+
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-chatbot-container</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">styleUrls</td>
+                <td class="col-md-9"><code>./chatbot-container.component.scss</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./chatbot-container.component.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#aiModelCommunicatorCreator" >aiModelCommunicatorCreator</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#blenderbot3BCommunicator" >blenderbot3BCommunicator</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#blenderbotCommunicator" >blenderbotCommunicator</a>
+                            </li>
+                            <li>
+                                <a href="#containerName" >containerName</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#dialogptCommunicator" >dialogptCommunicator</a>
+                            </li>
+                            <li>
+                                <a href="#isSuggestionShowned$" >isSuggestionShowned$</a>
+                            </li>
+                            <li>
+                                <a href="#messageList$" >messageList$</a>
+                            </li>
+                            <li>
+                                <a href="#messageState$" >messageState$</a>
+                            </li>
+                            <li>
+                                <a href="#messageSuggestionsList" >messageSuggestionsList</a>
+                            </li>
+                            <li>
+                                <a href="#modelList" >modelList</a>
+                            </li>
+                            <li>
+                                <a href="#selectedModelName$" >selectedModelName$</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Optional</span>
+                                <a href="#subscription" >subscription</a>
+                            </li>
+                            <li>
+                                <a href="#title" >title</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#addUserMessageToList" >addUserMessageToList</a>
+                            </li>
+                            <li>
+                                <a href="#createUserMessage" >createUserMessage</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnDestroy" >ngOnDestroy</a>
+                            </li>
+                            <li>
+                                <a href="#onChoosenModel" >onChoosenModel</a>
+                            </li>
+                            <li>
+                                <a href="#onSendMessage" >onSendMessage</a>
+                            </li>
+                            <li>
+                                <a href="#setModelCommunicator" >setModelCommunicator</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-constructor">
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(textMessageService: <a href="../injectables/TextMessageService.html" target="_self">TextMessageService</a>, suggestionService: <a href="../injectables/SuggestionsService.html" target="_self">SuggestionsService</a>, store: Store)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="53" class="link-to-prism">src/app/containers/chatbot-container/chatbot-container.component.ts:53</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>textMessageService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/TextMessageService.html" target="_self" >TextMessageService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>suggestionService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/SuggestionsService.html" target="_self" >SuggestionsService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>store</td>
+                                                  
+                                                        <td>
+                                                                    <code>Store</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+
+
+
+
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="addUserMessageToList"></a>
+                    <span class="name">
+                        <span ><b>addUserMessageToList</b></span>
+                        <a href="#addUserMessageToList"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>addUserMessageToList(message: <a href="../interfaces/TextMessage.html" target="_self">TextMessage</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="139"
+                                    class="link-to-prism">src/app/containers/chatbot-container/chatbot-container.component.ts:139</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>message</td>
+                                            <td>
+                                                            <code><a href="../interfaces/TextMessage.html" target="_self" >TextMessage</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="createUserMessage"></a>
+                    <span class="name">
+                        <span ><b>createUserMessage</b></span>
+                        <a href="#createUserMessage"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>createUserMessage(message: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="130"
+                                    class="link-to-prism">src/app/containers/chatbot-container/chatbot-container.component.ts:130</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>message</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="../interfaces/TextMessage.html" target="_self" >TextMessage</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnDestroy"></a>
+                    <span class="name">
+                        <span ><b>ngOnDestroy</b></span>
+                        <a href="#ngOnDestroy"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnDestroy()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="80"
+                                    class="link-to-prism">src/app/containers/chatbot-container/chatbot-container.component.ts:80</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onChoosenModel"></a>
+                    <span class="name">
+                        <span ><b>onChoosenModel</b></span>
+                        <a href="#onChoosenModel"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onChoosenModel(model: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="102"
+                                    class="link-to-prism">src/app/containers/chatbot-container/chatbot-container.component.ts:102</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>model</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onSendMessage"></a>
+                    <span class="name">
+                        <span ><b>onSendMessage</b></span>
+                        <a href="#onSendMessage"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onSendMessage(message: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="87"
+                                    class="link-to-prism">src/app/containers/chatbot-container/chatbot-container.component.ts:87</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>message</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="setModelCommunicator"></a>
+                    <span class="name">
+                        <span ><b>setModelCommunicator</b></span>
+                        <a href="#setModelCommunicator"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>setModelCommunicator()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="110"
+                                    class="link-to-prism">src/app/containers/chatbot-container/chatbot-container.component.ts:110</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="aiModelCommunicatorCreator"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>aiModelCommunicatorCreator</b></span>
+                        <a href="#aiModelCommunicatorCreator"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../classes/AiModelCommunicatorCreator.html" target="_self" >AiModelCommunicatorCreator</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="44" class="link-to-prism">src/app/containers/chatbot-container/chatbot-container.component.ts:44</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="blenderbot3BCommunicator"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>blenderbot3BCommunicator</b></span>
+                        <a href="#blenderbot3BCommunicator"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new ConcreteBlenderbot3BCommunicatorCreator()</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="46" class="link-to-prism">src/app/containers/chatbot-container/chatbot-container.component.ts:46</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="blenderbotCommunicator"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>blenderbotCommunicator</b></span>
+                        <a href="#blenderbotCommunicator"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new ConcreteBlenderbotCommunicatorCreator()</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="45" class="link-to-prism">src/app/containers/chatbot-container/chatbot-container.component.ts:45</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="containerName"></a>
+                    <span class="name">
+                        <span ><b>containerName</b></span>
+                        <a href="#containerName"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>containersName.CHATBOT</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="27" class="link-to-prism">src/app/containers/chatbot-container/chatbot-container.component.ts:27</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="dialogptCommunicator"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>dialogptCommunicator</b></span>
+                        <a href="#dialogptCommunicator"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new ConcreteDialogptCommunicatorCreator()</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="47" class="link-to-prism">src/app/containers/chatbot-container/chatbot-container.component.ts:47</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isSuggestionShowned$"></a>
+                    <span class="name">
+                        <span ><b>isSuggestionShowned$</b></span>
+                        <a href="#isSuggestionShowned$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>Observable&lt;boolean&gt;</code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="41" class="link-to-prism">src/app/containers/chatbot-container/chatbot-container.component.ts:41</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="messageList$"></a>
+                    <span class="name">
+                        <span ><b>messageList$</b></span>
+                        <a href="#messageList$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>Observable&lt;[]&gt;</code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">src/app/containers/chatbot-container/chatbot-container.component.ts:30</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="messageState$"></a>
+                    <span class="name">
+                        <span ><b>messageState$</b></span>
+                        <a href="#messageState$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../miscellaneous/typealiases.html#MessageState" target="_self" >Observable&lt;MessageState&gt;</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">src/app/containers/chatbot-container/chatbot-container.component.ts:33</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="messageSuggestionsList"></a>
+                    <span class="name">
+                        <span ><b>messageSuggestionsList</b></span>
+                        <a href="#messageSuggestionsList"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>string[]</code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="51" class="link-to-prism">src/app/containers/chatbot-container/chatbot-container.component.ts:51</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Handle Suggestions from presentanional component : message-suggestion-component</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="modelList"></a>
+                    <span class="name">
+                        <span ><b>modelList</b></span>
+                        <a href="#modelList"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>string[]</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="36" class="link-to-prism">src/app/containers/chatbot-container/chatbot-container.component.ts:36</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="selectedModelName$"></a>
+                    <span class="name">
+                        <span ><b>selectedModelName$</b></span>
+                        <a href="#selectedModelName$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>Observable&lt;string&gt;</code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="38" class="link-to-prism">src/app/containers/chatbot-container/chatbot-container.component.ts:38</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="subscription"></a>
+                    <span class="name">
+                            <span class="modifier">Optional</span>
+                        <span ><b>subscription</b></span>
+                        <a href="#subscription"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>Subscription</code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="53" class="link-to-prism">src/app/containers/chatbot-container/chatbot-container.component.ts:53</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="title"></a>
+                    <span class="name">
+                        <span ><b>title</b></span>
+                        <a href="#title"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&quot;Chatbot  AI&quot;</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">src/app/containers/chatbot-container/chatbot-container.component.ts:25</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, ElementRef, HostListener, ViewChild } from &#x27;@angular/core&#x27;;
+import { Subscription, tap } from &#x27;rxjs&#x27;;
+import { Observable } from &#x27;rxjs/internal/Observable&#x27;;
+import { AiModelCommunicatorCreator, ConcreteBlenderbot3BCommunicatorCreator, ConcreteBlenderbotCommunicatorCreator, ConcreteDialogptCommunicatorCreator, ConcreteFalconCommunicatorCreator, ConcreteLlamaCommunicatorCreator } from &#x27;src/app/common/factories/aimodel-communicator-factory&#x27;;
+import { ErrorMessageState, LoadingMessageState, MessageState, SuccessMessageState } from &#x27;src/app/common/models/message-state&#x27;;
+import { TextMessage } from &#x27;src/app/common/models/text-message&#x27;;
+import { TextMessageService } from &#x27;src/app/common/services/text-message.service&#x27;;
+import { containersName, environment, textMessageSugestions } from &#x27;src/environments/environment&#x27;;
+import { conversationalModelsName } from &#x27;src/environments/environment.development&#x27;;
+import { Store, select } from &#x27;@ngrx/store&#x27;;
+
+import { addAnswerAI, addUserQuestion, askAnswerAI, setAiModelName } from &#x27;src/app/state/chatbot/chatbot.actions&#x27;;
+import { selectAiModelName, selectIsNewConversation, selectMessageList, selectMessageState } from &#x27;src/app/state/chatbot/chatbot.reducer&#x27;;
+import { PictureMessage } from &#x27;src/app/common/models/picture-message&#x27;;
+import { SuggestionsService } from &#x27;src/app/common/services/suggestions.service&#x27;;
+//import { mySignal } from &#x27;src/app/components/message-suggestions/message-suggestions.component&#x27;;
+
+@Component({
+  selector: &#x27;app-chatbot-container&#x27;,
+  templateUrl: &#x27;./chatbot-container.component.html&#x27;,
+  styleUrls: [&#x27;./chatbot-container.component.scss&#x27;]
+})
+export class ChatbotContainerComponent {
+  // Title displayed in the top bar
+  title: string &#x3D; &quot;Chatbot  AI&quot;;
+  // Name of this container passed down to message-suggestion component. Used to treack down the source of the suggestions.
+  containerName &#x3D; containersName.CHATBOT;
+
+  // Contains all messages, user questions and AI answers
+  messageList$: Observable&lt;(TextMessage | PictureMessage)[]&gt;;
+
+  // Contains request state (success, loading or failed)
+  messageState$: Observable&lt;MessageState&gt;;
+
+  // Contains the names of the available models
+  modelList: string[] &#x3D; [];
+  // Name of the selected model used to generate answers
+  selectedModelName$: Observable&lt;string&gt;;
+
+  // If this is a new conversation show suggestions for conversation starter, otherwise hide suggestions (message-suggestions-component)
+  isSuggestionShowned$: Observable&lt;boolean&gt;;
+
+  // Instantiate all concrete items from factory
+  private aiModelCommunicatorCreator!: AiModelCommunicatorCreator;
+  private readonly blenderbotCommunicator &#x3D; new ConcreteBlenderbotCommunicatorCreator();
+  private readonly blenderbot3BCommunicator &#x3D; new ConcreteBlenderbot3BCommunicatorCreator();
+  private readonly dialogptCommunicator &#x3D; new ConcreteDialogptCommunicatorCreator();
+
+  /** Handle Suggestions from presentanional component : message-suggestion-component */
+  // Holds the suggestions of messages displayed in message-list component
+  messageSuggestionsList: string[];
+  // Store the subscription from the service observable to be able to unsubscribe when the component get destroyed
+  subscription?: Subscription;
+
+  constructor(private textMessageService: TextMessageService, private suggestionService: SuggestionsService, private store: Store) {
+    // Assign all observable
+    this.messageState$ &#x3D; this.store.pipe(select(selectMessageState));
+    this.messageList$ &#x3D; this.store.pipe(select(selectMessageList));
+    this.selectedModelName$ &#x3D; this.store.pipe(select(selectAiModelName));
+    this.isSuggestionShowned$ &#x3D; this.store.pipe(select(selectIsNewConversation));
+    this.setModelCommunicator();
+
+    // Fill modelList with the names of the models stored in environment variable
+    Object.entries(conversationalModelsName).forEach(([key, value]) &#x3D;&gt; {
+      this.modelList?.push(value);
+    });
+
+    // Fill array of suggestions of messages based on data retreived from local JSON
+    this.messageSuggestionsList &#x3D; textMessageSugestions;
+
+    // React when user click on suggested message
+    this.subscription &#x3D; this.suggestionService.notificationForChatbotContainerReceived.subscribe(
+      suggestion &#x3D;&gt; {
+        // When click on suggested message, the corresponding message is send
+        this.onSendMessage(suggestion);
+      }
+    )
+  }
+
+  ngOnDestroy(){
+    // Unsubscribe from observable otherwise it stays alive when the component is re-rendered and leads to multiple cast of 
+    // event (ie : multiple messages sent when the user clicks on the suggestion if the component has already been rendered at least once)
+    this.subscription?.unsubscribe();
+  }
+
+  // When user sends a message
+  onSendMessage(message: string) {
+    // Create TextMessage Object with user message
+    let userMessage &#x3D; this.createUserMessage(message);
+
+    // Add user message to the list of messages
+    this.addUserMessageToList(userMessage);
+
+    // Set the API URL for the model
+    this.textMessageService.setReourceUrl(this.aiModelCommunicatorCreator.getAPIUrl());
+
+    // Dispatch action to ask answer to AI via dedicated effect
+    this.store.dispatch(askAnswerAI({ message: message }));
+  }
+
+  // When user selects a model, the selected model is updated and the conresponding concrete builder is asigned as global variable
+  onChoosenModel(model: string) {
+    // Update the selected model name
+    this.store.dispatch(setAiModelName({ aiModelName: model }));
+    // Update the communicator
+    this.setModelCommunicator();
+  }
+
+  // Selects right concrete builder according to the selected model
+  setModelCommunicator() {
+    this.selectedModelName$.subscribe((selectedModelName) &#x3D;&gt; {
+      switch (selectedModelName) {
+        case (conversationalModelsName.BLENDER_BOT): {
+          this.aiModelCommunicatorCreator &#x3D; this.blenderbotCommunicator;
+          break;
+        }
+        case (conversationalModelsName.BLENDER_BOT_3B): {
+          this.aiModelCommunicatorCreator &#x3D; this.blenderbot3BCommunicator;
+          break;
+        }
+        case conversationalModelsName.DIALOGPT: {
+          this.aiModelCommunicatorCreator &#x3D; this.dialogptCommunicator;
+          break;
+        }
+      }
+    })
+  }
+
+  // Creates user message object
+  createUserMessage(message: string): TextMessage {
+    return {
+      type: &quot;text&quot;,
+      isAnswer: false,
+      text: message
+    };
+  }
+
+  // Adds a user message to the list of message displayed in the template
+  addUserMessageToList(message: TextMessage) {
+    this.store.dispatch(addUserQuestion({ textMessage: message }))
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;chatbot-container&quot;&gt;
+  &lt;div class&#x3D;&quot;chatbot-content&quot;&gt;
+    &lt;app-title-top-bar [title]&#x3D;&quot;title&quot; [modelList]&#x3D;&quot;modelList&quot; [selectedModel]&#x3D;&quot;selectedModelName$&quot;
+      (choosenModel)&#x3D;&quot;onChoosenModel($event)&quot;&gt;&lt;/app-title-top-bar&gt;
+    &lt;app-message-list #messageListTarget class&#x3D;&quot;message-list&quot; [messageList]&#x3D;&quot;(messageList$ |async)!&quot;
+      [messageState]&#x3D;&quot;messageState$&quot; [messageSuggestionsList]&#x3D;&quot;messageSuggestionsList&quot; [suggestionOrigin]&#x3D;&quot;containerName&quot; [isSuggestionsShowed]&#x3D;&quot;(isSuggestionShowned$ | async)!&quot;&gt;&lt;/app-message-list&gt;
+
+    &lt;app-message-box class&#x3D;&quot;message-box&quot; [messageState]&#x3D;&quot;messageState$&quot;
+      (sendMessage)&#x3D;&quot;onSendMessage($event)&quot;&gt;&lt;/app-message-box&gt;
+  &lt;/div&gt;
+  &lt;div class&#x3D;&quot;ai-model-detail&quot;&gt;
+    &lt;app-ai-model-detail [selectedModelName]&#x3D;&quot;selectedModelName$&quot;&gt;&lt;/app-ai-model-detail&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="styleData">
+                <p class="comment">
+                    <code>./chatbot-container.component.scss</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss">.chatbot-container {
+  container-type: inline-size;
+  container-name: chatbot-container;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  background-color: #f0f0f0;
+  justify-content: center;
+  border-radius: 15px;
+  overflow: hidden;
+}
+
+.chatbot-content {
+  display:grid;
+  grid-template-rows:auto 1fr auto;
+  grid-template-columns:100%;
+  width: 100%;
+  background-color: white;
+  box-shadow: 0 9px 0px 0px white, 0 -9px 0px 0px white, 12px 0 15px -4px rgba(194, 194, 194, 0.8), -12px 0 15px -4px rgba(194, 194, 194, 0.8);
+}
+
+.message-list {
+  height: 100%;
+  overflow-y: hidden;
+  -ms-overflow-style: none; 
+  scrollbar-width: none;
+}
+
+.message-list::-webkit-scrollbar { 
+  display: none;
+}
+
+.ai-model-detail {
+  max-width: 480px;
+}
+
+
+@container chatbot-container (max-width: 972px) {
+  .ai-model-detail {
+    display: none;
+  }
+}
+
+@container chatbot-container (min-width: 972px) and (max-width: 1599px) {
+  .ai-model-detail {
+    width: 34%;
+  }
+}
+
+
+@container chatbot-container (min-width: 1600px) {
+  .ai-model-detail {
+    //width: 40%;
+    width: 34%;
+  }
+}</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><div class="chatbot-container">  <div class="chatbot-content">    <app-title-top-bar [title]="title" [modelList]="modelList" [selectedModel]="selectedModelName$"      (choosenModel)="onChoosenModel($event)"></app-title-top-bar>    <app-message-list #messageListTarget class="message-list" [messageList]="(messageList$ |async)!"      [messageState]="messageState$" [messageSuggestionsList]="messageSuggestionsList" [suggestionOrigin]="containerName" [isSuggestionsShowed]="(isSuggestionShowned$ | async)!"></app-message-list>    <app-message-box class="message-box" [messageState]="messageState$"      (sendMessage)="onSendMessage($event)"></app-message-box>  </div>  <div class="ai-model-detail">    <app-ai-model-detail [selectedModelName]="selectedModelName$"></app-ai-model-detail>  </div></div></div>'
+    var COMPONENTS = [{'name': 'AiModelDetailComponent', 'selector': 'app-ai-model-detail'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'ChatbotContainerComponent', 'selector': 'app-chatbot-container'},{'name': 'ErrorMessageComponent', 'selector': 'app-error-message'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'LoadingMessageComponent', 'selector': 'app-loading-message'},{'name': 'MessageBoxComponent', 'selector': 'app-message-box'},{'name': 'MessageListComponent', 'selector': 'app-message-list'},{'name': 'MessageSuggestionsComponent', 'selector': 'app-message-suggestions'},{'name': 'PictureGenContainerComponent', 'selector': 'app-picture-gen-container'},{'name': 'SidenavComponent', 'selector': 'app-sidenav'},{'name': 'TitleTopBarComponent', 'selector': 'app-title-top-bar'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'ChatbotContainerComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'ChatbotContainerComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

@@ -1,0 +1,1221 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>chat-ai documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avaoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+
+               if ($darkModeToggles.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-block d-sm-none">
+            <a href="../" class="navbar-brand">chat-ai documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content miscellaneous-variables">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Miscellaneous</li>
+  <li class="breadcrumb-item">Variables</li>
+</ol>
+
+<section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <ul class="index-list">
+                        <li>
+                            <a href="#addAnswerAI" title="src/app/state/chatbot/chatbot.actions.ts" ><b>addAnswerAI</b>&nbsp;&nbsp;&nbsp;(src/.../chatbot.actions.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#addAnswerAI" title="src/app/state/picture-gen/picture-gen.actions.ts" ><b>addAnswerAI</b>&nbsp;&nbsp;&nbsp;(src/.../picture-gen.actions.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#addAnswerAIError" title="src/app/state/chatbot/chatbot.actions.ts" ><b>addAnswerAIError</b>&nbsp;&nbsp;&nbsp;(src/.../chatbot.actions.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#addAnswerAIError" title="src/app/state/picture-gen/picture-gen.actions.ts" ><b>addAnswerAIError</b>&nbsp;&nbsp;&nbsp;(src/.../picture-gen.actions.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#addUserQuestion" title="src/app/state/chatbot/chatbot.actions.ts" ><b>addUserQuestion</b>&nbsp;&nbsp;&nbsp;(src/.../chatbot.actions.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#addUserQuestion" title="src/app/state/picture-gen/picture-gen.actions.ts" ><b>addUserQuestion</b>&nbsp;&nbsp;&nbsp;(src/.../picture-gen.actions.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#askAnswerAI" title="src/app/state/chatbot/chatbot.actions.ts" ><b>askAnswerAI</b>&nbsp;&nbsp;&nbsp;(src/.../chatbot.actions.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#askAnswerAI" title="src/app/state/picture-gen/picture-gen.actions.ts" ><b>askAnswerAI</b>&nbsp;&nbsp;&nbsp;(src/.../picture-gen.actions.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#chatbotFeature" title="src/app/state/chatbot/chatbot.reducer.ts" ><b>chatbotFeature</b>&nbsp;&nbsp;&nbsp;(src/.../chatbot.reducer.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#chatbotFeatureKey" title="src/app/state/chatbot/chatbot.reducer.ts" ><b>chatbotFeatureKey</b>&nbsp;&nbsp;&nbsp;(src/.../chatbot.reducer.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#containersName" title="src/environments/environment.development.ts" ><b>containersName</b>&nbsp;&nbsp;&nbsp;(src/.../environment.development.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#containersName" title="src/environments/environment.ts" ><b>containersName</b>&nbsp;&nbsp;&nbsp;(src/.../environment.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#conversationalModelsName" title="src/environments/environment.development.ts" ><b>conversationalModelsName</b>&nbsp;&nbsp;&nbsp;(src/.../environment.development.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#conversationalModelsName" title="src/environments/environment.ts" ><b>conversationalModelsName</b>&nbsp;&nbsp;&nbsp;(src/.../environment.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#environment" title="src/environments/environment.development.ts" ><b>environment</b>&nbsp;&nbsp;&nbsp;(src/.../environment.development.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#environment" title="src/environments/environment.ts" ><b>environment</b>&nbsp;&nbsp;&nbsp;(src/.../environment.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#initialState" title="src/app/state/chatbot/chatbot.reducer.ts" ><b>initialState</b>&nbsp;&nbsp;&nbsp;(src/.../chatbot.reducer.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#initialState" title="src/app/state/picture-gen/picture-gen-reducer.ts" ><b>initialState</b>&nbsp;&nbsp;&nbsp;(src/.../picture-gen-reducer.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#loadingMessageState" title="src/app/state/chatbot/chatbot.reducer.ts" ><b>loadingMessageState</b>&nbsp;&nbsp;&nbsp;(src/.../chatbot.reducer.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#loadingMessageState" title="src/app/state/picture-gen/picture-gen-reducer.ts" ><b>loadingMessageState</b>&nbsp;&nbsp;&nbsp;(src/.../picture-gen-reducer.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#pictureGenFeature" title="src/app/state/picture-gen/picture-gen-reducer.ts" ><b>pictureGenFeature</b>&nbsp;&nbsp;&nbsp;(src/.../picture-gen-reducer.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#pictureGenFeatureKey" title="src/app/state/picture-gen/picture-gen-reducer.ts" ><b>pictureGenFeatureKey</b>&nbsp;&nbsp;&nbsp;(src/.../picture-gen-reducer.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#pictureMessageSugestions" title="src/environments/environment.development.ts" ><b>pictureMessageSugestions</b>&nbsp;&nbsp;&nbsp;(src/.../environment.development.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#pictureMessageSugestions" title="src/environments/environment.ts" ><b>pictureMessageSugestions</b>&nbsp;&nbsp;&nbsp;(src/.../environment.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#RESPONSIVE_WIDTH" title="src/app/sidenav/sidenav.component.ts" ><b>RESPONSIVE_WIDTH</b>&nbsp;&nbsp;&nbsp;(src/.../sidenav.component.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#setAiModelName" title="src/app/state/chatbot/chatbot.actions.ts" ><b>setAiModelName</b>&nbsp;&nbsp;&nbsp;(src/.../chatbot.actions.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#setAiModelName" title="src/app/state/picture-gen/picture-gen.actions.ts" ><b>setAiModelName</b>&nbsp;&nbsp;&nbsp;(src/.../picture-gen.actions.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#successMessageState" title="src/app/state/chatbot/chatbot.reducer.ts" ><b>successMessageState</b>&nbsp;&nbsp;&nbsp;(src/.../chatbot.reducer.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#successMessageState" title="src/app/state/picture-gen/picture-gen-reducer.ts" ><b>successMessageState</b>&nbsp;&nbsp;&nbsp;(src/.../picture-gen-reducer.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#textMessageSugestions" title="src/environments/environment.development.ts" ><b>textMessageSugestions</b>&nbsp;&nbsp;&nbsp;(src/.../environment.development.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#textMessageSugestions" title="src/environments/environment.ts" ><b>textMessageSugestions</b>&nbsp;&nbsp;&nbsp;(src/.../environment.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#textToImageModelsName" title="src/environments/environment.development.ts" ><b>textToImageModelsName</b>&nbsp;&nbsp;&nbsp;(src/.../environment.development.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#textToImageModelsName" title="src/environments/environment.ts" ><b>textToImageModelsName</b>&nbsp;&nbsp;&nbsp;(src/.../environment.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#" title="src/app/state/chatbot/chatbot.reducer.ts" ><b></b>&nbsp;&nbsp;&nbsp;(src/.../chatbot.reducer.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#" title="src/app/state/picture-gen/picture-gen-reducer.ts" ><b></b>&nbsp;&nbsp;&nbsp;(src/.../picture-gen-reducer.ts)</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+    <h3>src/app/state/chatbot/chatbot.actions.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="addAnswerAI"></a>
+                    <span class="name">
+                        <span ><b>addAnswerAI</b></span>
+                        <a href="#addAnswerAI"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createAction(&#x27;[chatbot Page] Add AI answer&#x27;, props&lt;{textMessage: TextMessage}&gt;())</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="addAnswerAIError"></a>
+                    <span class="name">
+                        <span ><b>addAnswerAIError</b></span>
+                        <a href="#addAnswerAIError"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createAction(&#x27;[chatbot Page] Error on API request&#x27;, props&lt;{errorMessageState: ErrorMessageState}&gt;())</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="addUserQuestion"></a>
+                    <span class="name">
+                        <span ><b>addUserQuestion</b></span>
+                        <a href="#addUserQuestion"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createAction(&#x27;[chatbot Page] Add user question&#x27;, props&lt;{textMessage: TextMessage}&gt;())</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="askAnswerAI"></a>
+                    <span class="name">
+                        <span ><b>askAnswerAI</b></span>
+                        <a href="#askAnswerAI"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createAction(&#x27;[chatbot Page] Ask AI a question&#x27;, props&lt;{message: string}&gt;())</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="setAiModelName"></a>
+                    <span class="name">
+                        <span ><b>setAiModelName</b></span>
+                        <a href="#setAiModelName"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createAction(&#x27;[chatbot Page] Error on API request&#x27;, props&lt;{aiModelName: string}&gt;())</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/app/state/picture-gen/picture-gen.actions.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="addAnswerAI"></a>
+                    <span class="name">
+                        <span ><b>addAnswerAI</b></span>
+                        <a href="#addAnswerAI"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createAction(&#x27;[PictureGen Page] Add AI answer&#x27;, props&lt;{pictureMessage: PictureMessage}&gt;())</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="addAnswerAIError"></a>
+                    <span class="name">
+                        <span ><b>addAnswerAIError</b></span>
+                        <a href="#addAnswerAIError"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createAction(&#x27;[PictureGen Page] Error on API request&#x27;, props&lt;{errorMessageState: ErrorMessageState}&gt;())</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="addUserQuestion"></a>
+                    <span class="name">
+                        <span ><b>addUserQuestion</b></span>
+                        <a href="#addUserQuestion"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createAction(&#x27;[PictureGen Page] Add user question&#x27;, props&lt;{textMessage: TextMessage}&gt;())</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="askAnswerAI"></a>
+                    <span class="name">
+                        <span ><b>askAnswerAI</b></span>
+                        <a href="#askAnswerAI"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createAction(&#x27;[PictureGen Page] Ask AI a question&#x27;, props&lt;{message: string}&gt;())</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="setAiModelName"></a>
+                    <span class="name">
+                        <span ><b>setAiModelName</b></span>
+                        <a href="#setAiModelName"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createAction(&#x27;[PictureGen Page] Error on API request&#x27;, props&lt;{aiModelName: string}&gt;())</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/app/state/chatbot/chatbot.reducer.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="chatbotFeature"></a>
+                    <span class="name">
+                        <span ><b>chatbotFeature</b></span>
+                        <a href="#chatbotFeature"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createFeature({
+  name: &quot;chatbot&quot;,
+  reducer: createReducer(
+    initialState,
+    on(ChatbotActions.askAnswerAI, state &#x3D;&gt; ({ ...state, messageState: loadingMessageState })),
+    on(ChatbotActions.addAnswerAI, (state, { textMessage }) &#x3D;&gt; ({ ...state, messageList: [...state.messageList, textMessage], messageState: successMessageState })),
+    on(ChatbotActions.addAnswerAIError, (state, { errorMessageState }) &#x3D;&gt; ({ ...state, messageState: errorMessageState })),
+    on(ChatbotActions.addUserQuestion, (state, { textMessage }) &#x3D;&gt; ({ ...state, messageList: [...state.messageList, textMessage], isNewConversation: false })),
+    on(ChatbotActions.setAiModelName, (state, { aiModelName }) &#x3D;&gt; ({ ...state, aiModelName: aiModelName })),
+  ),
+})</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="chatbotFeatureKey"></a>
+                    <span class="name">
+                        <span ><b>chatbotFeatureKey</b></span>
+                        <a href="#chatbotFeatureKey"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;chatbot&#x27;</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="initialState"></a>
+                    <span class="name">
+                        <span ><b>initialState</b></span>
+                        <a href="#initialState"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/State.html" target="_self" >State</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{
+  aiModelName: conversationalModelsName.BLENDER_BOT,
+  messageState: successMessageState,
+  messageList: [],
+  // Used to know if suggestions should be displayed (they are dipslayed only for new conversations)
+  isNewConversation: true
+}</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="loadingMessageState"></a>
+                    <span class="name">
+                        <span ><b>loadingMessageState</b></span>
+                        <a href="#loadingMessageState"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../miscellaneous/typealiases.html#LoadingMessageState" target="_self" >LoadingMessageState</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{ state: &quot;Loading&quot; }</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="successMessageState"></a>
+                    <span class="name">
+                        <span ><b>successMessageState</b></span>
+                        <a href="#successMessageState"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../miscellaneous/typealiases.html#SuccessMessageState" target="_self" >SuccessMessageState</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{ state: &quot;Success&quot; }</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name=""></a>
+                    <span class="name">
+                        <span ><b></b></span>
+                        <a href="#"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>chatbotFeature</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/environments/environment.development.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="containersName"></a>
+                    <span class="name">
+                        <span ><b>containersName</b></span>
+                        <a href="#containersName"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/object" target="_blank" >object</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{
+  CHATBOT: &quot;chatbot&quot;,
+  PICTUREGEN: &quot;picturegen&quot;
+}</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="conversationalModelsName"></a>
+                    <span class="name">
+                        <span ><b>conversationalModelsName</b></span>
+                        <a href="#conversationalModelsName"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/object" target="_blank" >object</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{
+  BLENDER_BOT: &quot;BlenderBot&quot;,
+  BLENDER_BOT_3B: &quot;BlenderBot 3B&quot;,
+  //LLAMA: &quot;LLaMA&quot;,
+  DIALOGPT: &quot;DialoGPT&quot;,
+  //FALCON: &quot;falcon&quot;
+}</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="environment"></a>
+                    <span class="name">
+                        <span ><b>environment</b></span>
+                        <a href="#environment"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/object" target="_blank" >object</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{
+  apiUrl: &quot;https://api-inference.huggingface.co/models/facebook/blenderbot-400M-distill&quot;,
+  blenderbotAPIUrl: &quot;https://api-inference.huggingface.co/models/facebook/blenderbot-400M-distill&quot;,
+  blenderbot3BAPIUrl: &quot;https://api-inference.huggingface.co/models/facebook/blenderbot-3B&quot;,
+  llamaAPIUrl: &quot;https://api-inference.huggingface.co/models/facebook/blenderbot-400M-distill&quot;,
+  dialoGptUrl: &quot;https://api-inference.huggingface.co/models/microsoft/DialoGPT-large&quot;,
+  falconUrl: &quot;https://api-inference.huggingface.co/models/tiiuae/falcon-7b-instruct&quot;,
+  stableDiffusionXlUrl: &quot;https://api-inference.huggingface.co/models/stabilityai/stable-diffusion-xl-base-1.0&quot;,
+  stableDiffusion1_5Url: &quot;https://api-inference.huggingface.co/models/runwayml/stable-diffusion-v1-5&quot;,
+  openjourneyUrl: &quot;https://api-inference.huggingface.co/models/prompthero/openjourney&quot;,
+  apiKey: &quot;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&quot;
+}</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="pictureMessageSugestions"></a>
+                    <span class="name">
+                        <span ><b>pictureMessageSugestions</b></span>
+                        <a href="#pictureMessageSugestions"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>[]</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[&quot;A cat in a space suit&quot;, &quot;Captain America poster style&quot;, &quot;A monkey playing the piano&quot;]</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="textMessageSugestions"></a>
+                    <span class="name">
+                        <span ><b>textMessageSugestions</b></span>
+                        <a href="#textMessageSugestions"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>[]</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[&quot;How are you?&quot;, &quot;Do you like movies?&quot;, &quot;Tell me a short story&quot;, &quot;What&#x27;s your favorite color?&quot;]</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="textToImageModelsName"></a>
+                    <span class="name">
+                        <span ><b>textToImageModelsName</b></span>
+                        <a href="#textToImageModelsName"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/object" target="_blank" >object</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{
+  OPENJOURNEY: &quot;openjourney&quot;,
+  STABLE_DIFFUSION_XL: &quot;Stable Diffusion XL&quot;,
+  STABLE_DIFFUSION_1_5: &quot;Stable Diffusion 1.5&quot;
+}</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/environments/environment.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="containersName"></a>
+                    <span class="name">
+                        <span ><b>containersName</b></span>
+                        <a href="#containersName"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/object" target="_blank" >object</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{
+  CHATBOT: &quot;chatbot&quot;,
+  PICTUREGEN: &quot;picturegen&quot;
+}</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="conversationalModelsName"></a>
+                    <span class="name">
+                        <span ><b>conversationalModelsName</b></span>
+                        <a href="#conversationalModelsName"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/object" target="_blank" >object</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{
+  BLENDER_BOT: &quot;BlenderBot&quot;,
+  BLENDER_BOT_3B: &quot;BlenderBot 3B&quot;,
+  //LLAMA: &quot;LLaMA&quot;,
+  DIALOGPT: &quot;DialoGPT&quot;,
+  //FALCON: &quot;falcon&quot;
+}</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="environment"></a>
+                    <span class="name">
+                        <span ><b>environment</b></span>
+                        <a href="#environment"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/object" target="_blank" >object</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{
+  apiUrl: &quot;https://api-inference.huggingface.co/models/facebook/blenderbot-400M-distill&quot;,
+  blenderbotAPIUrl: &quot;https://api-inference.huggingface.co/models/facebook/blenderbot-400M-distill&quot;,
+  blenderbot3BAPIUrl: &quot;https://api-inference.huggingface.co/models/facebook/blenderbot-3B&quot;,
+  llamaAPIUrl: &quot;https://api-inference.huggingface.co/models/facebook/blenderbot-400M-distill&quot;,
+  dialoGptUrl: &quot;https://api-inference.huggingface.co/models/microsoft/DialoGPT-large&quot;,
+  falconUrl: &quot;https://api-inference.huggingface.co/models/tiiuae/falcon-7b-instruct&quot;,
+  stableDiffusionXlUrl: &quot;https://api-inference.huggingface.co/models/stabilityai/stable-diffusion-xl-base-1.0&quot;,
+  stableDiffusion1_5Url: &quot;https://api-inference.huggingface.co/models/runwayml/stable-diffusion-v1-5&quot;,
+  openjourneyUrl: &quot;https://api-inference.huggingface.co/models/prompthero/openjourney&quot;,
+  apiKey: &quot;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&quot;
+}</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="pictureMessageSugestions"></a>
+                    <span class="name">
+                        <span ><b>pictureMessageSugestions</b></span>
+                        <a href="#pictureMessageSugestions"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>[]</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[&quot;A cat in a space suit&quot;, &quot;Captain America poster style&quot;, &quot;A monkey playing the piano&quot;]</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="textMessageSugestions"></a>
+                    <span class="name">
+                        <span ><b>textMessageSugestions</b></span>
+                        <a href="#textMessageSugestions"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>[]</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[&quot;How are you?&quot;, &quot;Do you like movies?&quot;, &quot;Tell me a short story&quot;, &quot;What&#x27;s your favorite color?&quot;]</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="textToImageModelsName"></a>
+                    <span class="name">
+                        <span ><b>textToImageModelsName</b></span>
+                        <a href="#textToImageModelsName"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/object" target="_blank" >object</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{
+  OPENJOURNEY: &quot;openjourney&quot;,
+  STABLE_DIFFUSION_XL: &quot;Stable Diffusion XL&quot;,
+  STABLE_DIFFUSION_1_5: &quot;Stable Diffusion 1.5&quot;
+}</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/app/state/picture-gen/picture-gen-reducer.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="initialState"></a>
+                    <span class="name">
+                        <span ><b>initialState</b></span>
+                        <a href="#initialState"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/State.html" target="_self" >State</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{
+  aiModelName: textToImageModelsName.OPENJOURNEY,
+  messageState: successMessageState,
+  messageList: [],
+  // Used to know if suggestions should be displayed (they are dipslayed only for new conversations)
+  isNewConversation: true
+}</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="loadingMessageState"></a>
+                    <span class="name">
+                        <span ><b>loadingMessageState</b></span>
+                        <a href="#loadingMessageState"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../miscellaneous/typealiases.html#LoadingMessageState" target="_self" >LoadingMessageState</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{ state: &quot;Loading&quot; }</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="pictureGenFeature"></a>
+                    <span class="name">
+                        <span ><b>pictureGenFeature</b></span>
+                        <a href="#pictureGenFeature"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createFeature({
+  name: &quot;pictureGen&quot;,
+  reducer: createReducer(
+    initialState,
+    on(PictureGenActions.askAnswerAI, state &#x3D;&gt; ({ ...state, messageState: loadingMessageState })),
+    on(PictureGenActions.addAnswerAI, (state, { pictureMessage }) &#x3D;&gt; ({ ...state, messageList: [...state.messageList, pictureMessage], messageState: successMessageState })),
+    on(PictureGenActions.addAnswerAIError, (state, { errorMessageState }) &#x3D;&gt; ({ ...state, messageState: errorMessageState })),
+    on(PictureGenActions.addUserQuestion, (state, { textMessage }) &#x3D;&gt; ({ ...state, messageList: [...state.messageList, textMessage], isNewConversation: false })),
+    on(PictureGenActions.setAiModelName, (state, { aiModelName }) &#x3D;&gt; ({ ...state, aiModelName: aiModelName })),
+  ),
+})</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="pictureGenFeatureKey"></a>
+                    <span class="name">
+                        <span ><b>pictureGenFeatureKey</b></span>
+                        <a href="#pictureGenFeatureKey"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;pictureGen&#x27;</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="successMessageState"></a>
+                    <span class="name">
+                        <span ><b>successMessageState</b></span>
+                        <a href="#successMessageState"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../miscellaneous/typealiases.html#SuccessMessageState" target="_self" >SuccessMessageState</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{ state: &quot;Success&quot; }</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name=""></a>
+                    <span class="name">
+                        <span ><b></b></span>
+                        <a href="#"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>pictureGenFeature</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/app/sidenav/sidenav.component.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="RESPONSIVE_WIDTH"></a>
+                    <span class="name">
+                        <span ><b>RESPONSIVE_WIDTH</b></span>
+                        <a href="#RESPONSIVE_WIDTH"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>700</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'miscellaneous-variables';
+            var COMPODOC_CURRENT_PAGE_URL = 'variables.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

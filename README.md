@@ -38,9 +38,9 @@ My main class used to communicate with the API is an abstract class with generic
 
 ![ChatAI](https://github.com/oranthony/ChatAI/assets/6161861/d75ce678-17dd-4e0e-852f-323777ae17e6)
 
-## Union Type
+## Union Type | Discriminating Union
 
-Custom types for status of message (Loading, Success, Error). Union type to reflect the status of the message. 
+Custom types for status of message (Loading, Success, Error). Discriminating Union to reflect the status of the message. 
 ![Union-type-1](https://github.com/oranthony/ChatAI/assets/6161861/bd7d14ee-8990-4015-9d80-44b0d5f4dc6a)
 ![Union-type-2](https://github.com/oranthony/ChatAI/assets/6161861/4bf12b82-f103-4499-917e-57fca628d6d9)
 
